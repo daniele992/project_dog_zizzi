@@ -1,0 +1,1 @@
+# Folder containing all the assets for the application
