@@ -1,4 +1,1 @@
-Configure:
-- MaterialApp
-- Routing
-- Dependency injection (if you use get_it, riverpod, etc.)
+Include le configurazioni principali dell’app, come il setup dell’applicazione, la navigazione e l’injection delle dipendenze.
