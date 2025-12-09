@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      nextScreen: const SignUp(),
+      nextScreen: const SignUpPage(),
       duration: 15000,
       backgroundColor: Colors.white,
       splashIconSize: double.infinity,
