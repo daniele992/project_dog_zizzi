@@ -4,6 +4,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../../core/constants/sizes.dart';
 import '../../../core/constants/text_strings.dart';
 import '../../../core/utils/responsive_helper.dart';
+import '../../../core/utils/validators/form_validators.dart';
 import '../../viewmodels/authentication/password_view_model.dart';
 import '../../widgets/password_strength_bar.dart';
 
@@ -80,16 +81,22 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                       Form(
                         child: Column(
                           children: [
+                            //TextFormField for insert Email
                             TextFormField(
+                              //controller:
+                              validator: FormValidators.validateEmail,
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(LineAwesomeIcons.envelope),
                                 labelText: tEmail,
                                 hintText: tHintInsertEmail,
                               ),
                             ),
-                            const SizedBox(height: tFormHeight - 10),
+                            const SizedBox(height: tFormHeight - 20),
 
+                            //TextFormField for insert Username
                             TextFormField(
+                              //controller:
+                              validator: FormValidators.validateUsername,
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(LineAwesomeIcons.user),
                                 labelText: tUsername,
@@ -98,7 +105,10 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             ),
                             const SizedBox(height: tFormHeight - 20),
 
+                            //TextFormField for insert Password
                             TextFormField(
+                              //controller:
+                              validator: FormValidators.validatePassword,
                               obscureText: true,
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(LineAwesomeIcons.user),
@@ -111,7 +121,10 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             ),
                             const SizedBox(height: tFormHeight - 20),
 
+                            //TextFormField for insert Repeat Password
                             TextFormField(
+                              //controller:
+                              validator: FormValidators.validatePassword,
                               obscureText: true,
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(LineAwesomeIcons.user),

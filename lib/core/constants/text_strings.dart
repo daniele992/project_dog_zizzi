@@ -21,3 +21,12 @@ const String tAddNumber = "Aggiungi numeri";
 const String tAddSpecialCharacters = "Aggiungi caratteri speciali";
 const String tStrengthPw = "La forza della password";
 const String tStrength = "Forza:";
+
+// ------------ VALIDATORS FORM ------------
+const String tEmailCannotEmpty = "Il campo Email non può essere vuoto";
+const String tInvalidEmailFormat = "Formato Email invalido";
+const String tBadWords = "Il testo contiene parole inappropriate";
+const String tOnlyLetters = "Solo lettere sono permesse";
+const String tUsernameCannotEmpty = "Il campo Username non può essere vuoto";
+const String tPasswordCannotEmpty = "Il campo Password non può essere vuoto";
+const String tPasswordValue = "La password deve essere lunga 8 caratteri, con una lettera maiuscola, un numero e un simbolo";
