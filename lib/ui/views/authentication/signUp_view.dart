@@ -17,13 +17,36 @@ class SignUpPage extends ConsumerStatefulWidget {
 
 class _SignUpPageState extends ConsumerState<SignUpPage> {
 
+  bool _obscureText = true; // inizialmente nascosta
+  bool _obscureTextRepeatPw = true; // inizialmente nascosta
+
+  final formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final repeatPwController = TextEditingController();
+
+  bool privacyAccepted = false;
+  bool conditionsAccepted = false;
+
+  @override
+  void dispose(){
+    //Importante: rilascia i controller
+    emailController.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
+    repeatPwController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
 
     final screenWidth = MediaQuery.of(context).size.width;
     final cardWidth = ResponsiveHelper.cardWidth(screenWidth);
-    final passwordNotifier = ref.watch(passwordProvider.notifier);
-    final password = ref.watch(passwordProvider);
+    //final passwordNotifier = ref.watch(passwordProvider.notifier);
+    //final password = ref.watch(passwordProvider);
+
 
     return Scaffold(
       backgroundColor: const Color(0xFFF1ECF3),
@@ -74,16 +97,15 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                           ],
                         ),
                       ),
-
                       const SizedBox(height: 32),
-
                       // ----------------- FORM ------------------------
                       Form(
+                        key: formKey,
                         child: Column(
                           children: [
                             //TextFormField for insert Email
                             TextFormField(
-                              //controller:
+                              controller: emailController,
                               validator: FormValidators.validateEmail,
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(LineAwesomeIcons.envelope),
@@ -95,7 +117,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
                             //TextFormField for insert Username
                             TextFormField(
-                              //controller:
+                              controller: usernameController,
                               validator: FormValidators.validateUsername,
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(LineAwesomeIcons.user),
@@ -107,13 +129,23 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
                             //TextFormField for insert Password
                             TextFormField(
-                              //controller:
+                              controller: passwordController,
                               validator: FormValidators.validatePassword,
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                prefixIcon: Icon(LineAwesomeIcons.user),
+                              obscureText: _obscureText,
+                              decoration: InputDecoration(
+                                prefixIcon: const Icon(LineAwesomeIcons.lock_solid),
                                 labelText: tPassword,
                                 hintText: tHintInsertPw,
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscureText ? LineAwesomeIcons.eye : LineAwesomeIcons.eye_slash,
+                                  ),
+                                  onPressed: (){
+                                    setState((){
+                                      _obscureText = !_obscureText; //toggle
+                                    });
+                                  },
+                                ),
                               ),
                               onChanged: (value) {
                                 ref.read(passwordProvider.notifier).state = value; //aggiorna il provider
@@ -123,13 +155,23 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
                             //TextFormField for insert Repeat Password
                             TextFormField(
-                              //controller:
+                              controller: repeatPwController,
                               validator: FormValidators.validatePassword,
                               obscureText: true,
-                              decoration: const InputDecoration(
-                                prefixIcon: Icon(LineAwesomeIcons.user),
+                              decoration: InputDecoration(
+                                prefixIcon: const Icon(LineAwesomeIcons.lock_solid),
                                 labelText: tRepeatPw,
                                 hintText: tHintRepeatPw,
+                                suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _obscureTextRepeatPw ? LineAwesomeIcons.eye : LineAwesomeIcons.eye_slash,
+                                    ),
+                                    onPressed: (){
+                                      setState(() {
+                                        _obscureTextRepeatPw = !_obscureTextRepeatPw;
+                                      });
+                                    },
+                                )
                               ),
                             ),
 
@@ -144,11 +186,16 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
                             const SizedBox(height: tFormHeight - 20),
 
+                            //CheckBox for accept privacy
                             Row(
                               children: [
                                 Checkbox(
-                                  value: false,
-                                  onChanged: (value) {},
+                                  value: privacyAccepted,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      privacyAccepted = value ?? false;
+                                    });
+                                  },
                                 ),
                                 const Expanded(
                                   child: Text(tAcceptPrivacy),
@@ -156,11 +203,16 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                               ],
                             ),
 
+                            //CheckBox for accept conditions
                             Row(
                               children: [
                                 Checkbox(
-                                  value: false,
-                                  onChanged: (value) {},
+                                  value: conditionsAccepted,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      conditionsAccepted = value ?? false;
+                                    });
+                                  },
                                 ),
                                 const Expanded(
                                   child: Text(tAcceptConditions),
@@ -173,7 +225,11 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  if(formKey.currentState!.validate()){
+                                    print("Tutti i campi validi");
+                                  }
+                                },
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(vertical: 16),
                                 ),
@@ -190,7 +246,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
             ),
           ),
         ),
-      ),
+      )
     );
   }
 }

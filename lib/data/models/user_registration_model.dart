@@ -1,4 +1,4 @@
-class UserRegistration {
+class UserRegistrationModel {
   final String username;
   final String email;
   final String password;
@@ -7,7 +7,7 @@ class UserRegistration {
   final bool admin;
 
   //Constructor User
-  UserRegistration({
+  UserRegistrationModel({
     required this.username,
     required this.email,
     required this.password,
