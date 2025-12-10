@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:project_dog_zizzi/core/providers/authRepository/auth_providers.dart';
+import 'package:project_dog_zizzi/data/models/user_registration_model.dart';
 import '../../../core/constants/sizes.dart';
 import '../../../core/constants/text_strings.dart';
 import '../../../core/utils/responsive_helper.dart';
@@ -190,6 +192,11 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             Row(
                               children: [
                                 Checkbox(
+                                  checkColor: Colors.green,
+                                  activeColor: Colors.white,
+                                  side: BorderSide(
+                                    color: privacyAccepted ? Colors.green : Colors.red
+                                  ),
                                   value: privacyAccepted,
                                   onChanged: (value) {
                                     setState(() {
@@ -197,8 +204,14 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                     });
                                   },
                                 ),
-                                const Expanded(
-                                  child: Text(tAcceptPrivacy),
+                                Expanded(
+                                  child: Text(
+                                      tAcceptPrivacy,
+                                      style: TextStyle(color: privacyAccepted
+                                          ? Colors.green
+                                          : Colors.red
+                                      ),
+                                  ),
                                 )
                               ],
                             ),
@@ -207,6 +220,11 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             Row(
                               children: [
                                 Checkbox(
+                                  activeColor: Colors.white,
+                                  checkColor: Colors.green,
+                                  side: BorderSide(
+                                    color: conditionsAccepted ? Colors.green : Colors.red
+                                  ),
                                   value: conditionsAccepted,
                                   onChanged: (value) {
                                     setState(() {
@@ -214,8 +232,14 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                     });
                                   },
                                 ),
-                                const Expanded(
-                                  child: Text(tAcceptConditions),
+                                Expanded(
+                                  child: Text(
+                                      tAcceptConditions,
+                                      style: TextStyle(color: conditionsAccepted
+                                          ? Colors.green
+                                          : Colors.red
+                                      ),
+                                  ),
                                 )
                               ],
                             ),
@@ -227,13 +251,26 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   if(formKey.currentState!.validate()){
-                                    print("Tutti i campi validi");
+
+                                    final user = UserRegistrationModel(
+                                      email: emailController.text,
+                                      username: usernameController.text,
+                                      password: passwordController.text,
+                                      privacyPolicy: privacyAccepted,
+                                      conditions: conditionsAccepted,
+                                      admin: false,
+                                    );
+                                    ref.read(signUpViewModelProvider.notifier).register(user);
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(vertical: 16),
+                                  backgroundColor: Colors.blue,
                                 ),
-                                child: const Text(tSignUp),
+                                child: const Text(
+                                    tSignUp,
+                                    style: TextStyle(color: Colors.white, fontSize: 20),
+                                ),
                               ),
                             ),
                           ],
