@@ -5,7 +5,8 @@ import 'package:project_dog_zizzi/core/providers/authRepository/auth_providers.d
 import 'package:project_dog_zizzi/data/models/user_registration_model.dart';
 import '../../../core/constants/sizes.dart';
 import '../../../core/constants/text_strings.dart';
-import '../../../core/utils/responsive_helper.dart';
+import '../../../core/utils/helper/responsive_helper.dart';
+import '../../../core/utils/helper/snackbar_helper.dart';
 import '../../../core/utils/validators/form_validators.dart';
 import '../../viewmodels/authentication/password_view_model.dart';
 import '../../widgets/password_strength_bar.dart';
@@ -250,6 +251,16 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                               width: double.infinity,
                               child: ElevatedButton(
                                 onPressed: () {
+                                  if(!privacyAccepted || !conditionsAccepted){
+                                    SnackbarHelper.showSnackBar(
+                                      context,
+                                      message: tSnackBarWarning,
+                                      icon: Icons.error
+                                    );
+                                    return;
+                                  }
+
+                                  //Se tutti i checkbox sono accettati, continua con la registrazione
                                   if(formKey.currentState!.validate()){
 
                                     final user = UserRegistrationModel(
