@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -5,11 +6,13 @@ import 'package:project_dog_zizzi/core/providers/authRepository/auth_providers.d
 import 'package:project_dog_zizzi/data/models/user_registration_model.dart';
 import '../../../core/constants/sizes.dart';
 import '../../../core/constants/text_strings.dart';
+import '../../../core/providers/connectivity/connectivity_provider.dart';
 import '../../../core/utils/helper/responsive_helper.dart';
 import '../../../core/utils/helper/snackbar_helper.dart';
 import '../../../core/utils/validators/form_validators.dart';
 import '../../viewmodels/authentication/password_view_model.dart';
 import '../../widgets/password_strength_bar.dart';
+import 'dart:async';
 
 class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({super.key});
@@ -20,6 +23,8 @@ class SignUpPage extends ConsumerStatefulWidget {
 
 class _SignUpPageState extends ConsumerState<SignUpPage> {
 
+  ProviderSubscription<AsyncValue<ConnectivityResult>>? _connectivityListener;
+  Timer? _connectivityDebounce;
   bool _obscureText = true; // inizialmente nascosta
   bool _obscureTextRepeatPw = true; // inizialmente nascosta
 
@@ -39,17 +44,48 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     usernameController.dispose();
     passwordController.dispose();
     repeatPwController.dispose();
+    _connectivityDebounce?.cancel();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _connectivityListener = ref.listenManual<AsyncValue<ConnectivityResult>>(
+      connectivityProvider,
+        (previous, next){
+        final previousStatus = previous?.valueOrNull;
+        final currenStatus = next.valueOrNull;
+
+          //Evita snackbar inutili all'avvio
+          if(previousStatus == null || currenStatus == null) return;
+
+          //Se lo stato non cambia non facciamo nulla
+          if(previousStatus == currenStatus) return;
+
+          _connectivityDebounce?.cancel();
+
+          _connectivityDebounce = Timer(const Duration(milliseconds: 2000), (){
+            final hasConnection = currenStatus != ConnectivityResult.none;
+
+            if(!mounted) return;
+            SnackbarHelper.showSnackBar(
+              context,
+              message: hasConnection ? tConnectionActive : tNoConnection,
+              icon: hasConnection ? Icons.wifi : Icons.wifi_off,
+              backgroundColor: hasConnection ? Colors.green : Colors.red
+            );
+          });
+        }
+    );
   }
 
   @override
   Widget build(BuildContext context) {
 
+    final connectivityAsyncValue = ref.watch(connectivityProvider);
     final screenWidth = MediaQuery.of(context).size.width;
     final cardWidth = ResponsiveHelper.cardWidth(screenWidth);
-    //final passwordNotifier = ref.watch(passwordProvider.notifier);
-    //final password = ref.watch(passwordProvider);
-
 
     return Scaffold(
       backgroundColor: const Color(0xFFF1ECF3),
@@ -247,43 +283,59 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
                             const SizedBox(height: 30),
 
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  if(!privacyAccepted || !conditionsAccepted){
-                                    SnackbarHelper.showSnackBar(
-                                      context,
-                                      message: tSnackBarWarning,
-                                      icon: Icons.error
-                                    );
-                                    return;
-                                  }
+                            Consumer(
+                              builder: (context, ref, _) {
+                                final connectivityAsyncValue = ref.watch(connectivityProvider);
 
-                                  //Se tutti i checkbox sono accettati, continua con la registrazione
-                                  if(formKey.currentState!.validate()){
+                                // 👉 di default consideriamo la connessione attiva
+                                final hasConnection = connectivityAsyncValue.maybeWhen(
+                                  data: (status) => status != ConnectivityResult.none,
+                                  orElse: () => true, // loading → pulsante attivo
+                                );
 
-                                    final user = UserRegistrationModel(
-                                      email: emailController.text,
-                                      username: usernameController.text,
-                                      password: passwordController.text,
-                                      privacyPolicy: privacyAccepted,
-                                      conditions: conditionsAccepted,
-                                      admin: false,
-                                    );
-                                    ref.read(signUpViewModelProvider.notifier).register(user);
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
-                                  backgroundColor: Colors.blue,
-                                ),
-                                child: const Text(
-                                    tSignUp,
-                                    style: TextStyle(color: Colors.white, fontSize: 20),
-                                ),
-                              ),
-                            ),
+                                return SizedBox(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    onPressed: hasConnection
+                                        ? () {
+                                      if (!privacyAccepted || !conditionsAccepted) {
+                                        SnackbarHelper.showSnackBar(
+                                          context,
+                                          message: tSnackBarWarning,
+                                          icon: Icons.error,
+                                        );
+                                        return;
+                                      }
+
+                                      if (formKey.currentState!.validate()) {
+                                        final user = UserRegistrationModel(
+                                          email: emailController.text,
+                                          username: usernameController.text,
+                                          password: passwordController.text,
+                                          privacyPolicy: privacyAccepted,
+                                          conditions: conditionsAccepted,
+                                          admin: false,
+                                        );
+                                        ref.read(signUpViewModelProvider.notifier).register(user);
+                                      }
+                                    }
+                                        : null,
+
+                                    style: ButtonStyle(
+                                      backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+                                        if (!hasConnection) return Colors.grey;
+                                        if (states.contains(WidgetState.hovered)) return Colors.green;
+                                        return Colors.blue;
+                                      }),
+                                    ),
+                                    child: Text(
+                                      hasConnection ? tSignUp : tNoConnection,
+                                      style: const TextStyle(color: Colors.white, fontSize: 20),
+                                    ),
+                                  ),
+                                );
+                              },
+                            )
                           ],
                         ),
                       ),

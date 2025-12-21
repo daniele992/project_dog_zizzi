@@ -41,6 +41,7 @@ dependencies:
   line_awesome_flutter: ^3.0.1
   connectivity_plus: ^7.0.0
   bad_words: ^0.3.0
+  google_fonts: ^6.3.3
 
 dev_dependencies:
   flutter_test:

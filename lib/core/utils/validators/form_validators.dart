@@ -15,6 +15,7 @@ class FormValidators {
 
     final Filter filter = Filter();
     if (value == null || value.trim().isEmpty) {return tUsernameCannotEmpty;}
+    if(value.length <= 3 && value.trim().isNotEmpty) {return tUsernameLength;}
     final lettersOnlyRegex = RegExp(r'^[a-zA-ZàèéìòùÀÈÉÌÒÙ\s\-]+$');
     if (!lettersOnlyRegex.hasMatch(value)) {return tOnlyLetters;}
     // Filters offensive words.

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/ui/views/splash_screen/splash_screen.dart';
+import 'core/utils/themes/theme.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -14,10 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
+      themeMode: ThemeMode.system,
+      darkTheme: TAppTheme.darkTheme,
+      theme: TAppTheme.lightTheme,
       home: const SplashScreen(),
     );
   }

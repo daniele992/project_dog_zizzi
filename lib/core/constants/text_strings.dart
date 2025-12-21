@@ -28,8 +28,13 @@ const String tInvalidEmailFormat = "Formato Email invalido";
 const String tBadWords = "Il testo contiene parole inappropriate";
 const String tOnlyLetters = "Solo lettere sono permesse";
 const String tUsernameCannotEmpty = "Il campo Username non può essere vuoto";
+const String tUsernameLength = "Username deve essere almeno di 4 lettere";
 const String tPasswordCannotEmpty = "Il campo Password non può essere vuoto";
 const String tPasswordValue = "La password deve essere lunga 8 caratteri, con una lettera maiuscola, un numero e un simbolo";
 
 // ------------ HELPER ------------
 const String tSnackBarWarning = "Devi accettare termini e privacy per registrarti";
+
+// ------------ GLOBAL TEXT ------------
+const String tNoConnection = "Connessione Internet assente";
+const String tConnectionActive = "Connessione Internet ripristinata";
