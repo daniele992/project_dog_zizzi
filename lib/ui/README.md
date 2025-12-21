@@ -10,3 +10,21 @@ home/
 ├── home_view.dart
 ├── home_viewmodel.dart
 └── widgets/
+
+# PASSAGGI REGISTRAZIONE
+FLUTTER
+SignUpPage
+↓
+SignUpViewModel
+↓ HTTP POST
+API .NET
+Controller
+↓
+UseCase / Service
+↓
+Repository
+↓
+Entity Framework Core
+↓
+SQL Server (SSMS)
+

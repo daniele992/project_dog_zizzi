@@ -9,6 +9,6 @@ class AuthRepositoryImpl implements AuthRepository{
 
   @override
   Future<bool> register(UserRegistrationModel user) async {
-    return await dataSource.register(user.toJson());
+    return await dataSource.register(user.toJson() as UserRegistrationModel);
   }
 }

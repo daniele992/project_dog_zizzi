@@ -1,17 +1,19 @@
-abstract class AuthRemoteDataSource {
-  Future<bool> register(Map<String, dynamic> data);
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import '../../models/user_registration_model.dart';
 
-}
+class AuthRemoteDataSource {
+  final http.Client client;
 
-class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
+  AuthRemoteDataSource(this.client);
 
-  @override
-  Future<bool> register(Map<String, dynamic> data) async{
-    //Todo fare chiamata HTTP al backend .NET
-    //ESEMPIO
-    await Future.delayed(const Duration(seconds: 1));
-    print("DATI INVIATI AL SERVER:");
-    print(data);
-    return true;
+  Future<bool> register(UserRegistrationModel user) async {
+    final response = await client.post(
+      Uri.parse('https://localhost:5001/api/auth/register'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(user.toJson()),
+    );
+
+    return response.statusCode == 200;
   }
 }
