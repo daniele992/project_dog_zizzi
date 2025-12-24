@@ -344,7 +344,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                         if (updatedState.isSuccess) {
                                           SnackbarHelper.showSnackBar(
                                             context,
-                                            message: 'Registrazione avvenuta con successo!',
+                                            message: tSuccessRegistration,
                                             icon: Icons.check_circle,
                                             backgroundColor: Colors.green,
                                           );
@@ -394,13 +394,13 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text("Hai già un account? "),
+                                  const Text(tAlreadyAccount),
                                   InkWell(
                                     onTap: () {
                                       Navigator.pushNamed(context, AppRoutes.login); //Navigator.pushReplacementNamed(context, '/login');
                                     },
                                     child: const Text(
-                                      "Accedi",
+                                      tLogin,
                                       style: TextStyle(
                                         color: Colors.blue,
                                         fontWeight: FontWeight.bold,

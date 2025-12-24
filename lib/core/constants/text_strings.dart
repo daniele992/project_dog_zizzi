@@ -1,4 +1,4 @@
-// -------------- AUTHENTICATION TEXT ---------------
+// -------------- AUTHENTICATION TEXT & LOGIN ---------------
 const String tEmail = "E-mail";
 const String tName = "Nome";
 const String tSurname = "Cognome";
@@ -15,6 +15,9 @@ const String tAcceptPrivacy = "Accetto la privacy";
 const String tAcceptConditions = "Accetto i termini e le condizioni";
 const String tSignUp = "Registrati";
 const String tStillRegister = "Devi ancora registrarti? ";
+const String tSuccessRegistration = "Registrazione avvenuta con successo!";
+const String tLogin = "Accedi";
+const String tAlreadyAccount = "Hai già un account? ";
 
 // ------------ CALCULATE STRENGTH PASSWORD ------------
 const String tAddEightCharacters = "Aggiungi almeno 8 caratteri";
