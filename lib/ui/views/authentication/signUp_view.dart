@@ -10,6 +10,7 @@ import '../../../core/providers/connectivity/connectivity_provider.dart';
 import '../../../core/utils/helper/responsive_helper.dart';
 import '../../../core/utils/helper/snackbar_helper.dart';
 import '../../../core/utils/validators/form_validators.dart';
+import '../../../routes/app_routes.dart';
 import '../../viewmodels/authentication/password_view_model.dart';
 import '../../widgets/password_strength_bar.dart';
 import 'dart:async';
@@ -30,7 +31,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
-  final usernameController = TextEditingController();
+  final nameController = TextEditingController();
+  final surnameController = TextEditingController();
   final passwordController = TextEditingController();
   final repeatPwController = TextEditingController();
 
@@ -41,7 +43,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   void dispose(){
     //Importante: rilascia i controller
     emailController.dispose();
-    usernameController.dispose();
+    nameController.dispose();
+    surnameController.dispose();
     passwordController.dispose();
     repeatPwController.dispose();
     _connectivityDebounce?.cancel();
@@ -154,14 +157,26 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             ),
                             const SizedBox(height: tFormHeight - 20),
 
-                            //TextFormField for insert Username
+                            //TextFormField for insert name
                             TextFormField(
-                              controller: usernameController,
-                              validator: FormValidators.validateUsername,
+                              controller: nameController,
+                              validator: FormValidators.validateName,
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(LineAwesomeIcons.user),
-                                labelText: tUsername,
-                                hintText: tHintInsertUsername,
+                                labelText: tName,
+                                hintText: tHintInsertUName,
+                              ),
+                            ),
+                            const SizedBox(height: tFormHeight - 20),
+
+                            //TextFormField for insert surname
+                            TextFormField(
+                              controller: surnameController,
+                              validator: FormValidators.validateName,
+                              decoration: const InputDecoration(
+                                prefixIcon: Icon(LineAwesomeIcons.user),
+                                labelText: tSurname,
+                                hintText: tHintSurName,
                               ),
                             ),
                             const SizedBox(height: tFormHeight - 20),
@@ -195,8 +210,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             //TextFormField for insert Repeat Password
                             TextFormField(
                               controller: repeatPwController,
-                              validator: FormValidators.validatePassword,
-                              obscureText: true,
+                              validator: (value) => FormValidators.validateRepeatPassword(value, passwordController.text),
+                              obscureText: _obscureTextRepeatPw,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(LineAwesomeIcons.lock_solid),
                                 labelText: tRepeatPw,
@@ -290,14 +305,17 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                 // 👉 di default consideriamo la connessione attiva
                                 final hasConnection = connectivityAsyncValue.maybeWhen(
                                   data: (status) => status != ConnectivityResult.none,
-                                  orElse: () => true, // loading → pulsante attivo
+                                  orElse: () => true,
                                 );
+
+                                // ✅ Stato aggiornato dal ViewModel
+                                final signUpState = ref.watch(signUpViewModelProvider);
 
                                 return SizedBox(
                                   width: double.infinity,
                                   child: ElevatedButton(
                                     onPressed: hasConnection
-                                        ? () {
+                                        ? () async {
                                       if (!privacyAccepted || !conditionsAccepted) {
                                         SnackbarHelper.showSnackBar(
                                           context,
@@ -310,13 +328,36 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                       if (formKey.currentState!.validate()) {
                                         final user = UserRegistrationModel(
                                           email: emailController.text,
-                                          username: usernameController.text,
+                                          name: nameController.text,
+                                          surname: surnameController.text,
                                           password: passwordController.text,
                                           privacyPolicy: privacyAccepted,
                                           conditions: conditionsAccepted,
                                           admin: false,
                                         );
-                                        ref.read(signUpViewModelProvider.notifier).register(user);
+
+                                        // Chiamata al ViewModel
+                                        await ref.read(signUpViewModelProvider.notifier).register(user);
+
+                                        // ✅ Gestione messaggi dopo la registrazione
+                                        final updatedState = ref.read(signUpViewModelProvider);
+                                        if (updatedState.isSuccess) {
+                                          SnackbarHelper.showSnackBar(
+                                            context,
+                                            message: 'Registrazione avvenuta con successo!',
+                                            icon: Icons.check_circle,
+                                            backgroundColor: Colors.green,
+                                          );
+                                          // Optional: navigazione ad altra schermata
+                                          // Navigator.pushReplacementNamed(context, '/home');
+                                        } else if (updatedState.errorMessage != null) {
+                                          SnackbarHelper.showSnackBar(
+                                            context,
+                                            message: updatedState.errorMessage!,
+                                            icon: Icons.error,
+                                            backgroundColor: Colors.red,
+                                          );
+                                        }
                                       }
                                     }
                                         : null,
@@ -328,13 +369,47 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                         return Colors.blue;
                                       }),
                                     ),
-                                    child: Text(
+
+                                    // ✅ UI pulsante: testo o caricamento
+                                    child: signUpState.isLoading
+                                        ? const SizedBox(
+                                      width: 24,
+                                      height: 24,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                        : Text(
                                       hasConnection ? tSignUp : tNoConnection,
                                       style: const TextStyle(color: Colors.white, fontSize: 20),
                                     ),
                                   ),
                                 );
+
                               },
+                            ),
+                            const SizedBox(height: 16),
+                            Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text("Hai già un account? "),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pushNamed(context, AppRoutes.login); //Navigator.pushReplacementNamed(context, '/login');
+                                    },
+                                    child: const Text(
+                                      "Accedi",
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             )
                           ],
                         ),

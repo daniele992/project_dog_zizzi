@@ -1,20 +1,51 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_dog_zizzi/data/models/user_registration_model.dart';
-import 'package:project_dog_zizzi/domain/usecases/register_user.dart';
+import 'package:project_dog_zizzi/ui/viewmodels/authentication/sign_up_state.dart';
+import '../../../core/constants/text_strings.dart';
+import '../../../data/datasources/remote/auth_remote_datasource.dart';
+import '../../../data/models/user_registration_model.dart';
+import '../../../domain/usecases/register_user.dart';
 
-class SignUpViewModel extends StateNotifier<AsyncValue<bool>> {
+
+class SignUpViewModel extends StateNotifier<SignUpState> {
   final RegisterUser registerUser;
 
-  SignUpViewModel(this.registerUser) : super(const AsyncValue.data(false));
+  SignUpViewModel(this.registerUser) : super(const SignUpState());
 
   Future<void> register(UserRegistrationModel user) async {
-    try{
-      state = const AsyncValue.loading();
+    // Imposta lo stato su loading
+    state = state.copyWith(isLoading: true, isSuccess: false, errorMessage: null);
 
-      final result = await registerUser(user);
-      state = AsyncValue.data(result);
-    } catch(e, st) {
-      state = AsyncValue.error(e, st);
+    try {
+      final success = await registerUser(user);
+
+      if (success) {
+        state = state.copyWith(isLoading: false, isSuccess: true);
+      } else {
+        state = state.copyWith(
+          isLoading: false,
+          isSuccess: false,
+          errorMessage: tRegistrationFailed,
+        );
+      }
+    } on AuthException catch (e) {
+      // Errore personalizzato dal datasource
+      state = state.copyWith(
+        isLoading: false,
+        isSuccess: false,
+        errorMessage: e.message,
+      );
+    } catch (e) {
+      // Altri errori generici
+      state = state.copyWith(
+        isLoading: false,
+        isSuccess: false,
+        errorMessage: '$tUnexpectedError: $e',
+      );
     }
+  }
+
+  // Facoltativo: reset dello stato
+  void reset() {
+    state = const SignUpState();
   }
 }

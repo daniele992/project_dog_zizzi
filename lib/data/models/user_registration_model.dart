@@ -1,5 +1,6 @@
 class UserRegistrationModel {
-  final String username;
+  final String name;
+  final String surname;
   final String email;
   final String password;
   final bool privacyPolicy;
@@ -8,7 +9,8 @@ class UserRegistrationModel {
 
   //Constructor User
   UserRegistrationModel({
-    required this.username,
+    required this.name,
+    required this.surname,
     required this.email,
     required this.password,
     required this.privacyPolicy,
@@ -20,7 +22,8 @@ class UserRegistrationModel {
   In pratica prende i campi della classe, li mette dentro una mappa, restituisce un JSON pronto per essere inviato all'API.
   "Trasforma questo oggetto Dart in un contenitore di dati che il backend può capire". */
   Map<String, dynamic> toJson() => {
-    "username": username,
+    "name": name,
+    "surname": surname,
     "email": email,
     "password": password,
     "acceptPrivacy": privacyPolicy,

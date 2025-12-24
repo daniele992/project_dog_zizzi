@@ -1,4 +1,5 @@
 import 'package:bad_words/bad_words.dart';
+import 'package:flutter/cupertino.dart';
 import '../../constants/text_strings.dart';
 
 class FormValidators {
@@ -11,7 +12,7 @@ class FormValidators {
   }
 
   ///Checks that the name is not empty. Verifies it contains only letters (a-z, A-Z). Uses the bad_words library to filter offensive words and returns an error if any are found.
-  static String? validateUsername(String? value) {
+  static String? validateName(String? value) {
 
     final Filter filter = Filter();
     if (value == null || value.trim().isEmpty) {return tUsernameCannotEmpty;}
@@ -30,6 +31,19 @@ class FormValidators {
     String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     RegExp regex = RegExp(pattern);
     if (!regex.hasMatch(value)) {return tPasswordValue;}
+    return null;
+  }
+
+  static String? validateRepeatPassword(String? value, String originalPassword) {
+    if (value == null || value.isEmpty) return tPasswordCannotEmpty;
+
+    String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regex = RegExp(pattern);
+
+    if (!regex.hasMatch(value)) return tPasswordValue;
+
+    if (value != originalPassword) return tErrorPasswordRepeat;
+
     return null;
   }
 }

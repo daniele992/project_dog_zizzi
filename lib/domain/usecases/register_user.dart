@@ -1,8 +1,8 @@
 import 'package:project_dog_zizzi/data/models/user_registration_model.dart';
-import '../repositories/auth_repository.dart';
+import '../repositories/authentication/registration_repository.dart';
 
 class RegisterUser {
-  final AuthRepository repository;
+  final RegistrationRepository repository;
 
   RegisterUser(this.repository);
 

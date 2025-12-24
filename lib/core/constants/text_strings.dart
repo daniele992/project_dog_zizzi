@@ -1,17 +1,20 @@
 // -------------- AUTHENTICATION TEXT ---------------
 const String tEmail = "E-mail";
-const String tUsername = "Username";
+const String tName = "Nome";
+const String tSurname = "Cognome";
 const String tPassword = "Password";
 const String tCreateAccount = "Crea il tuo account";
 const String tCompilateField = "Compila i campi per registrarti";
 const String tHintInsertEmail = "Inserisci la tua email";
-const String tHintInsertUsername = "Inserisci uno username";
+const String tHintInsertUName = "Inserisci il nome";
+const String tHintSurName = "Inserisci il cognome";
 const String tHintInsertPw = "Inserisci una password";
 const String tRepeatPw = "Ripeti password";
 const String tHintRepeatPw = "Ripeti la password";
 const String tAcceptPrivacy = "Accetto la privacy";
 const String tAcceptConditions = "Accetto i termini e le condizioni";
 const String tSignUp = "Registrati";
+const String tStillRegister = "Devi ancora registrarti? ";
 
 // ------------ CALCULATE STRENGTH PASSWORD ------------
 const String tAddEightCharacters = "Aggiungi almeno 8 caratteri";
@@ -31,6 +34,7 @@ const String tUsernameCannotEmpty = "Il campo Username non può essere vuoto";
 const String tUsernameLength = "Username deve essere almeno di 4 lettere";
 const String tPasswordCannotEmpty = "Il campo Password non può essere vuoto";
 const String tPasswordValue = "La password deve essere lunga 8 caratteri, con una lettera maiuscola, un numero e un simbolo";
+const String tErrorPasswordRepeat = "Le password non coincidono";
 
 // ------------ HELPER ------------
 const String tSnackBarWarning = "Devi accettare termini e privacy per registrarti";
@@ -38,3 +42,7 @@ const String tSnackBarWarning = "Devi accettare termini e privacy per registrart
 // ------------ GLOBAL TEXT ------------
 const String tNoConnection = "Connessione Internet assente";
 const String tConnectionActive = "Connessione Internet ripristinata";
+
+// ------------ MESSAGGI DI ERRORE ------------
+const String tRegistrationFailed = "Registrazione fallita per motivi sconosciuti";
+const String tUnexpectedError = "Errore imprevisto:";
