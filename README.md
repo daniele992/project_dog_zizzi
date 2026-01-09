@@ -55,7 +55,7 @@ VIEW - VIEWMODEL - USECASE - REPOSITORY - DATASOURCE - DATABASE.
 
 FLUSSO COMPLETO
 1. VIEW: utente preme "Registrati" → legge i controller → chiama viewModel.register(user).
-2. VIEWMODEL: mposta loading, chiama il RegisterUser usecase.
+2. VIEWMODEL: imposta loading, chiama il RegisterUser usecase.
 3. USECASE: applica regole di dominio (es. normalizza dati), chiama AuthRepository.register(user).
 4. REPOSITORYIMPL: costruisce payload e chiama AuthRemoteDataSource.register(payload) (o local se necessario).
 5. REMOTEDATASOURCE: invia POST al backend .NET/Node (es. POST /api/register).

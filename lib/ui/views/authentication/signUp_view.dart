@@ -47,7 +47,6 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     surnameController.dispose();
     passwordController.dispose();
     repeatPwController.dispose();
-    _connectivityDebounce?.cancel();
     super.dispose();
   }
 
@@ -257,13 +256,18 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                   },
                                 ),
                                 Expanded(
-                                  child: Text(
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.pushNamed(context, AppRoutes.acceptPrivacy);
+                                    },
+                                    child: Text(
                                       tAcceptPrivacy,
                                       style: TextStyle(color: privacyAccepted
                                           ? Colors.green
                                           : Colors.red
                                       ),
-                                  ),
+                                    ),
+                                  )
                                 )
                               ],
                             ),
@@ -285,13 +289,18 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                   },
                                 ),
                                 Expanded(
-                                  child: Text(
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.pushNamed(context, AppRoutes.acceptConditions);
+                                    },
+                                    child: Text(
                                       tAcceptConditions,
                                       style: TextStyle(color: conditionsAccepted
                                           ? Colors.green
                                           : Colors.red
                                       ),
-                                  ),
+                                    ),
+                                  )
                                 )
                               ],
                             ),

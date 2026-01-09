@@ -5,10 +5,12 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:project_dog_zizzi/routes/app_routes.dart';
 import '../../../core/constants/sizes.dart';
 import '../../../core/constants/text_strings.dart';
+import '../../../core/providers/authRepository/login_providers.dart';
 import '../../../core/providers/connectivity/connectivity_provider.dart';
 import '../../../core/utils/helper/responsive_helper.dart';
 import '../../../core/utils/helper/snackbar_helper.dart';
 import '../../../core/utils/validators/form_validators.dart';
+import '../../../data/models/login_request_model.dart';
 import '../../viewmodels/authentication/password_view_model.dart';
 import 'dart:async';
 
@@ -172,7 +174,8 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                               ),
                               const SizedBox(height: tFormHeight - 20),
 
-                              /* Consumer(
+                              //Button per il login
+                              Consumer(
                                 builder: (context, ref, _) {
                                   final connectivityAsyncValue = ref.watch(connectivityProvider);
                                   final hasConnection = connectivityAsyncValue.maybeWhen(
@@ -193,12 +196,9 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                                             password: passwordController.text,
                                           );
 
-                                          await ref
-                                              .read(loginViewModelProvider.notifier)
-                                              .login(request);
+                                          await ref.read(loginViewModelProvider.notifier).login(request);
 
-                                          final updatedState =
-                                          ref.read(loginViewModelProvider);
+                                          final updatedState = ref.read(loginViewModelProvider);
 
                                           if (updatedState.hasValue && updatedState.value == true) {
                                             SnackbarHelper.showSnackBar(
@@ -207,7 +207,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                                               icon: Icons.check_circle,
                                               backgroundColor: Colors.green,
                                             );
-                                            // Navigator.pushReplacementNamed(context, '/home');
+                                            Navigator.pushNamed(context, AppRoutes.homepage);
                                           }
                                         }
                                       }
@@ -218,7 +218,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                                     ),
                                   );
                                 },
-                              ), */
+                              ),
 
                               const SizedBox(height: 16),
                               Center(

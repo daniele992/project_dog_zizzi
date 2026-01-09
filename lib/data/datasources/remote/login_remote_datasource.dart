@@ -9,7 +9,7 @@ class LoginRemoteDataSource {
 
   Future<bool> login(LoginRequestModel request) async {
     final response = await client.post(
-      Uri.parse('https://localhost:5059/api/auth/login'),
+      Uri.parse('http://localhost:5059/api/auth/login'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(request.toJson()),
     );

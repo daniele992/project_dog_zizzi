@@ -11,5 +11,18 @@ home/
 ├── home_viewmodel.dart
 └── widgets/
 
+# ARCHITETTURA LOGIN
+VIEW (LoginPage)
+↓
+VIEWMODEL (LoginViewModel)
+↓
+USECASE (LoginUser)
+↓
+REPOSITORY (AuthRepository)
+↓
+DATASOURCE (AuthRemoteDataSource)
+↓
+API .NET → SQL Server
+
 
 
