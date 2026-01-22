@@ -46,6 +46,9 @@ const String tSnackBarWarning = "Devi accettare termini e privacy per registrart
 const String tNoConnection = "Connessione Internet assente";
 const String tConnectionActive = "Connessione Internet ripristinata";
 
-// ------------ MESSAGGI DI ERRORE ------------
+// ------------ ERROR MESSAGE ------------
 const String tRegistrationFailed = "Registrazione fallita per motivi sconosciuti";
 const String tUnexpectedError = "Errore imprevisto:";
+
+// ------------ HOMEPAGE ------------
+const String tProfile = "Profilo";

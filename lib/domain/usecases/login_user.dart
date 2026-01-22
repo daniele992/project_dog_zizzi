@@ -6,7 +6,7 @@ class LoginUser {
 
   LoginUser(this.repository);
 
-  Future<bool> call(LoginRequestModel request) async {
+  Future<String> call(LoginRequestModel request) async {
     return await repository.login(request);
   }
 }
