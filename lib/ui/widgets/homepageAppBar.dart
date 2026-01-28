@@ -15,18 +15,32 @@ class HomepageAppbar extends ConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final userNameAsync = ref.watch(userFullNameProvider);
+    final isAdmin = ref.watch(userIsAdmin);
 
     return AppBar(
       elevation: 0,
       centerTitle: true,
       backgroundColor: Colors.transparent,
-      title: userNameAsync.when(
-          loading: () => const Text('Caricamento...'),
-          error: (_, __) => const Text(tProfile),
-          data: (name) => Text(
-            name ?? tProfile,
-            style: Theme.of(context).textTheme.headlineMedium,
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          userNameAsync.when(
+              loading: () => const Text("Caricamento..."),
+              error: (_, __) => const Text(tProfile),
+              data: (name) => Text(
+                name ?? tProfile,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
           ),
+          isAdmin.when(
+              loading: () => const SizedBox.shrink(),
+              error: (_, __) => const SizedBox.shrink(),
+              data: (isAdmin) => Text(
+                isAdmin ? "Admin" : "User",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+          )
+        ],
       ),
       actions: [
         Container(

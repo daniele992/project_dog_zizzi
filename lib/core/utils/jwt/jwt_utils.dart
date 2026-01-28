@@ -33,11 +33,15 @@ class JwtUtils {
   }
 
   static Future<bool> isAdmin() async {
+    //Legge il token dallo storage
     final token = await _storage.read(key: 'jwt');
-
     if(token == null) return false;
+
+    //Decodifica il payload
     final decoded = JwtDecoder.decode(token);
-    return decoded['role'] == true;
+
+    //Recupera la claim "admin" e converte in boolean
+    return decoded['admin'] == "True";
   }
 
   static Future<bool> isLoggedIn() async {
