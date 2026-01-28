@@ -52,3 +52,5 @@ const String tUnexpectedError = "Errore imprevisto:";
 
 // ------------ HOMEPAGE ------------
 const String tProfile = "Profilo";
+const String tEmailSupport = "moranidaniele129@yahoo.it";
+const String tAppName = "/appable:";
