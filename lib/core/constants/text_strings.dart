@@ -45,12 +45,16 @@ const String tSnackBarWarning = "Devi accettare termini e privacy per registrart
 // ------------ GLOBAL TEXT ------------
 const String tNoConnection = "Connessione Internet assente";
 const String tConnectionActive = "Connessione Internet ripristinata";
+const String tLoading = "Caricamento...";
 
 // ------------ ERROR MESSAGE ------------
 const String tRegistrationFailed = "Registrazione fallita per motivi sconosciuti";
 const String tUnexpectedError = "Errore imprevisto:";
+const String tGeneralError = "Errore";
 
 // ------------ HOMEPAGE ------------
 const String tProfile = "Profilo";
 const String tEmailSupport = "moranidaniele129@yahoo.it";
 const String tAppName = "/appable:";
+const String tAddPosts = "Aggiungi post";
+const String tAddDogs = "Aggiungi cane";

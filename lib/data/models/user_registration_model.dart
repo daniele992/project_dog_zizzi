@@ -20,7 +20,8 @@ class UserRegistrationModel {
 
   /*Metodo Dart che serve a convertire un oggetto dalla classe in un oggetto JSON Così può essere inviato al servere tramite una richiesta HTTP.
   In pratica prende i campi della classe, li mette dentro una mappa, restituisce un JSON pronto per essere inviato all'API.
-  "Trasforma questo oggetto Dart in un contenitore di dati che il backend può capire". */
+  "Trasforma questo oggetto Dart in un contenitore di dati che il backend può capire".
+  toJson è pensato solo per POST e non per GET*/
   Map<String, dynamic> toJson() => {
     "name": name,
     "surname": surname,
