@@ -25,4 +25,21 @@ DATASOURCE (AuthRemoteDataSource)
 API .NET → SQL Server
 
 
+# ARCHITETTURA GENERALE
+
+View
+↓
+ViewModel
+↓
+UseCase (GetUsers)
+↓
+Repository (UserRepository)
+↓
+RepositoryImpl
+↓
+UserRemoteDataSource
+↓
+API .NET
+
+
 

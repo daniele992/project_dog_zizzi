@@ -32,7 +32,7 @@ class AuthService {
     return await _storage.read(key: 'jwt');
   }
 
-// Metodo per logout
+  // Metodo per logout
   static Future<void> logout() async {
     await _storage.delete(key: 'jwt');
   }

@@ -51,6 +51,7 @@ const String tLoading = "Caricamento...";
 const String tRegistrationFailed = "Registrazione fallita per motivi sconosciuti";
 const String tUnexpectedError = "Errore imprevisto:";
 const String tGeneralError = "Errore";
+const String tErrorDownloadUser = "Errore caricamento utenti";
 
 // ------------ HOMEPAGE ------------
 const String tProfile = "Profilo";
@@ -58,3 +59,12 @@ const String tEmailSupport = "moranidaniele129@yahoo.it";
 const String tAppName = "/appable:";
 const String tAddPosts = "Aggiungi post";
 const String tAddDogs = "Aggiungi cane";
+
+// ------------ MODEL MESSAGE ------------
+const String tNoAllergy = "Allergie non definite";
+const String tNoFoodIntolerances = "Intolleranze non definite";
+const String tNoTypeFood = "Tipo di cibo non definito";
+const String tNoPathologies = "Patologie non definite";
+const String tNoNotes = "Nessun testo";
+const String tNoField = "Campo non definito";
+const String tNoFearsOrPhobies = "Paure o fobie non definite";
