@@ -12,8 +12,10 @@ class UserViewModel extends StateNotifier<AsyncValue<List<UserModel>>>{
      state = const AsyncValue.loading();
      final users = await getUsers(isAdmin: isAdmin);
      state = AsyncValue.data(users);
+     print(isAdmin);
    } catch (e, st) {
      state = AsyncValue.error(e, st);
+     print(isAdmin);
    }
   }
 }

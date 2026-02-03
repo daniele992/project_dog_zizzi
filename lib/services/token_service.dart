@@ -1,9 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
-const _storage = FlutterSecureStorage();
+/*const _storage = FlutterSecureStorage();
 
 class AuthService {
   static Future<bool> login(String email, String password) async {
@@ -36,4 +35,23 @@ class AuthService {
   static Future<void> logout() async {
     await _storage.delete(key: 'jwt');
   }
+} */
+
+class TokenStorage {
+  final FlutterSecureStorage _storage;
+
+  TokenStorage(this._storage);
+
+  Future<void> saveToken(String token) async {
+    await _storage.write(key: 'jwt', value: token);
+  }
+
+  Future<String?> getToken() async {
+    return _storage.read(key: 'jwt');
+  }
+
+  Future<void> clear() async {
+    await _storage.delete(key: 'jwt');
+  }
+
 }

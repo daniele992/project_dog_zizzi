@@ -52,6 +52,7 @@ const String tRegistrationFailed = "Registrazione fallita per motivi sconosciuti
 const String tUnexpectedError = "Errore imprevisto:";
 const String tGeneralError = "Errore";
 const String tErrorDownloadUser = "Errore caricamento utenti";
+const String tErrorNoToken = "Token non disponibile";
 
 // ------------ HOMEPAGE ------------
 const String tProfile = "Profilo";

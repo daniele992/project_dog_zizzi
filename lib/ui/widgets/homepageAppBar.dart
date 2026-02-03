@@ -5,7 +5,6 @@ import '../../core/constants/image_strings.dart';
 import '../../core/constants/text_strings.dart';
 import '../../core/providers/authRepository/user_provider.dart';
 
-
 class HomepageAppbar extends ConsumerWidget implements PreferredSizeWidget {
   const HomepageAppbar({super.key, required this.isDark});
 
@@ -15,7 +14,7 @@ class HomepageAppbar extends ConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final userNameAsync = ref.watch(userFullNameProvider);
-    final isAdmin = ref.watch(userIsAdmin);
+    final isAdminAsync = ref.watch(userIsAdminProvider);
 
     return AppBar(
       elevation: 0,
@@ -32,13 +31,10 @@ class HomepageAppbar extends ConsumerWidget implements PreferredSizeWidget {
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
           ),
-          isAdmin.when(
-              loading: () => const SizedBox.shrink(),
-              error: (_, __) => const SizedBox.shrink(),
-              data: (isAdmin) => Text(
-                isAdmin ? "Admin" : "User",
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
+          isAdminAsync.when(
+              loading: () => const CircularProgressIndicator(),
+              error: (_, __) => const Text('Errore'),
+              data: (isAdmin){ return Text(isAdmin ? 'Admin' : 'User');}
           )
         ],
       ),

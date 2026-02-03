@@ -1,24 +1,24 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:project_dog_zizzi/services/token_service.dart';
 import '../../../data/models/login_request_model.dart';
 import '../../../domain/usecases/login_user.dart';
 
 class LoginViewModel extends StateNotifier<AsyncValue<bool>> {
   final LoginUser loginUser;
-  final storage = const FlutterSecureStorage();
+  final TokenStorage tokenStorage;
 
-  LoginViewModel(this.loginUser) : super(const AsyncValue.data(false));
+  LoginViewModel(this.loginUser, this.tokenStorage) : super(const AsyncValue.data(false));
 
-  Future<void> login(LoginRequestModel request) async {
+  Future<void> login(LoginRequestModel request) async { //Future<void> login(String email, String password) async {}
 
     try {
       state = const AsyncValue.loading();
 
       // LOGIN --> ricevo JWT
-      final token = await loginUser(request);
+      final token = await loginUser(request);  //final toke = await loginUser(email, password);
 
       //Salvo il Token
-      await storage.write(key: 'jwt', value: token);
+      await tokenStorage.saveToken(token);
 
       state = const AsyncValue.data(true);
 

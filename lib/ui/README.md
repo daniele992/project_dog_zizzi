@@ -43,3 +43,4 @@ API .NET
 
 
 
+UI → ViewModel → UseCase → Repository → DataSource → API

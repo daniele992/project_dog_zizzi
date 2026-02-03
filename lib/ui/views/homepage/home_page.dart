@@ -23,7 +23,7 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
 
     final isDark = MediaQuery.of(context).platformBrightness == Brightness.dark; //Dark mode
     final pageIndex = ref.watch(pageIndexProvider);
-    final isAdmin = ref.watch(userIsAdmin);
+    final isAdmin = ref.watch(userIsAdminProvider);
 
     final List<Widget> pages = [
       const ListUsers(),
