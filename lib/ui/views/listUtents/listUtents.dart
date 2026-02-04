@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_dog_zizzi/core/providers/filter/user_filter_provider.dart';
 import 'package:project_dog_zizzi/core/providers/user/user_providers.dart';
+import 'package:project_dog_zizzi/ui/widgets/build_loading.dart';
+import 'package:project_dog_zizzi/ui/widgets/responsive_grid.dart';
+import '../../widgets/build_Filter.dart';
 
 class ListUsers extends ConsumerStatefulWidget {
   const ListUsers({super.key});
@@ -20,83 +24,28 @@ class _ListUsers extends ConsumerState<ListUsers> {
 
   @override
   Widget build(BuildContext context) {
-    final usersAsync = ref.watch(userViewModelProvider);
 
-    return usersAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, st) => Center(child: Text('Errore: $e')),
-      data: (users) {
-        if (users.isEmpty) {
-          return const Center(child: Text('Nessun utente trovato'));
-        }
+    final userAsync = ref.watch(userViewModelProvider);
+    final adminFilter = ref.watch(userAdminFilterProvider);
 
-        return SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: users.map((user) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    side: BorderSide(color: Colors.grey.shade300, width: 1),
-                  ),
-                  elevation: 3,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${user.name} ${user.surname}',
-                          style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(user.email),
-                        const SizedBox(height: 4),
-                        Text('Admin: ${user.admin ? "Sì" : "No"}'),
-                        const SizedBox(height: 4),
-                        Text(
-                          'Creato il: ${user.createdAt.toLocal().toString().split(" ")[0]}',
-                          style: const TextStyle(fontSize: 12, color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        );
-      },
+    return Column(
+      children: [
+        const SizedBox(height: 16),
+
+        //FILTRO
+        buildFilter(ref, adminFilter),
+
+        const SizedBox(height: 16),
+
+        //LISTA
+        Expanded(
+            child: userAsync.when(
+                loading: buildLoading,
+                error: (e,_) => Center(child:Text(e.toString())),
+                data: buildResponsiveList,
+            ),
+        ),
+      ],
     );
-
-
-
   }
 }
-
-
-/* @override
-Widget build(BuildContext context) {
-
-  final usersAsync = ref.watch(userViewModelProvider);
-
-  return Scaffold(
-    body: usersAsync.when(
-      data: (users) => ListView.builder(
-        itemCount: users.length,
-        itemBuilder: (_, index){
-          final user = users[index];
-          return ListTile(
-            title: Text('${user.name} ${user.surname}'),
-            subtitle: Text(user.email),
-          );
-        },
-      ),
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e,_) => Center(child: Text(e.toString())),
-    ),
-  );
-} */

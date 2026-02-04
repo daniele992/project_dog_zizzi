@@ -46,6 +46,7 @@ const String tSnackBarWarning = "Devi accettare termini e privacy per registrart
 const String tNoConnection = "Connessione Internet assente";
 const String tConnectionActive = "Connessione Internet ripristinata";
 const String tLoading = "Caricamento...";
+const String tLoadingUsers = "Caricamento Utenti...";
 
 // ------------ ERROR MESSAGE ------------
 const String tRegistrationFailed = "Registrazione fallita per motivi sconosciuti";
@@ -69,3 +70,9 @@ const String tNoPathologies = "Patologie non definite";
 const String tNoNotes = "Nessun testo";
 const String tNoField = "Campo non definito";
 const String tNoFearsOrPhobies = "Paure o fobie non definite";
+
+// ------------ FILTER ------------
+const String tAllUsers = "Tutti";
+const String tOnlyAdmin = "Solo Admin";
+const String tOnlyNoAdmin = "Solo non Admin";
+const String tFilterUsers = "Filtra utenti";

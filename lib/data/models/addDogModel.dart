@@ -70,7 +70,6 @@ class BehaviorAndHabits {
 
 }
 
-
 class AddDogModel {
   final Registry registry;
   final Health health;
