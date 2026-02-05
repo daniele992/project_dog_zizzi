@@ -18,6 +18,7 @@ class UserCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
+          mainAxisSize: MainAxisSize.min, //Evita Overflow
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
@@ -49,6 +50,8 @@ class UserCard extends StatelessWidget {
             // EMAIL
             Text(
               user.email,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 14),
             ),
 
@@ -62,6 +65,30 @@ class UserCard extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
+
+            const SizedBox(height: 8),
+
+            // TERMINI ACCETTATI
+            Text(
+                'Termini Accettati: ${user.acceptTerms ? 'Si' : 'No'}',
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey
+                ),
+
+            ),
+
+            const SizedBox(height: 8),
+
+            // CONDIZIONI ACCETTATE
+            Text(
+                'Condizioni Accettate: ${user.acceptPrivacy ? 'Si' : 'No'}',
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey
+                ),
+            ),
+
           ],
         ),
       ),
