@@ -89,6 +89,17 @@ class UserCard extends StatelessWidget {
                 ),
             ),
 
+            //ICONA PER MOSTRARE INFORMAZIONI AGGIUNTIVE, IN QUESTO CASO I CANI
+            Align(
+              alignment: Alignment.bottomRight,
+              child: IconButton(
+                  color: Colors.blue,
+                  iconSize: 36,
+                  icon: const Icon(Icons.add_circle),
+                  onPressed: (){},
+              ),
+            )
+
           ],
         ),
       ),

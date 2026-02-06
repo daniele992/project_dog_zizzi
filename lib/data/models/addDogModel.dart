@@ -1,13 +1,13 @@
 import 'package:project_dog_zizzi/core/constants/text_strings.dart';
 
-class Registry {
+class RegistryModel {
   final int ownerId; //Chiave esterna
   final String name;
   final int? age;
   final String gender;
   final String breed;
 
-  const Registry({
+  const RegistryModel({
     required this.ownerId,
     required this.name,
     this.age,
@@ -24,14 +24,14 @@ class Registry {
   };
 }
 
-class Health {
+class HealthModel {
   final String? allergy;
   final String? foodIntolerances;
   final String? typeFood;
   final String? pathologies;
   final String? notesHealth;
 
-  const Health({
+  const HealthModel({
     this.allergy,
     this.foodIntolerances,
     this.typeFood,
@@ -48,13 +48,13 @@ class Health {
   };
 }
 
-class BehaviorAndHabits {
+class BehaviorAndHabitsModel {
   final String? socialization;
   final String? fearsOrPhobias;
   final String? energyLevel;
   final String? notesBehavioral;
 
-  const BehaviorAndHabits({
+  const BehaviorAndHabitsModel({
     this.socialization,
     this.fearsOrPhobias,
     this.energyLevel,
@@ -71,9 +71,9 @@ class BehaviorAndHabits {
 }
 
 class AddDogModel {
-  final Registry registry;
-  final Health health;
-  final BehaviorAndHabits behaviorAndHabits;
+  final RegistryModel registry;
+  final HealthModel health;
+  final BehaviorAndHabitsModel behaviorAndHabits;
 
   const AddDogModel({
     required this.registry,

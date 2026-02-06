@@ -39,6 +39,9 @@ const String tPasswordCannotEmpty = "Il campo Password non può essere vuoto";
 const String tPasswordValue = "La password deve essere lunga 8 caratteri, con una lettera maiuscola, un numero e un simbolo";
 const String tErrorPasswordRepeat = "Le password non coincidono";
 
+// ------------ VALIDATORS FORM DOG ------------
+const String tNameDogCannotEmpty = "Il campo nome non può essere vuoto";
+
 // ------------ HELPER ------------
 const String tSnackBarWarning = "Devi accettare termini e privacy per registrarti";
 
@@ -47,6 +50,8 @@ const String tNoConnection = "Connessione Internet assente";
 const String tConnectionActive = "Connessione Internet ripristinata";
 const String tLoading = "Caricamento...";
 const String tLoadingUsers = "Caricamento Utenti...";
+const String tDelete = "Cancella";
+const String tSave = "Salva";
 
 // ------------ ERROR MESSAGE ------------
 const String tRegistrationFailed = "Registrazione fallita per motivi sconosciuti";
@@ -76,3 +81,26 @@ const String tAllUsers = "Tutti";
 const String tOnlyAdmin = "Solo Admin";
 const String tOnlyNoAdmin = "Solo non Admin";
 const String tFilterUsers = "Filtra utenti";
+
+// ------------ FORM DOG ------------
+const String tAddDog = "Nuovo amico a quattro zampe";
+const String tAgeDog = "Anni";
+const String tGenderDog = "Sesso";
+const String tBreedDog = "Razza";
+const String tAllergyDog = "Allergia/e";
+const String tFoodIntolerancesDog = "Intolleranze";
+const String tTypeFoodDog = "Tipo di alimentazione";
+const String tPathologiesDog = "Patologie";
+const String tNoteHealthDog = "Note";
+const String tSocializationDog = "Socializzazione";
+const String tFearsOrPhobiasDog = "Paure o Fobie";
+const String tEnergyLevelDog = "Livello di energia";
+const String tNoteBehavioralDog = "Note abitudini";
+const String tTitleRegistry = "Anagrafica";
+const String tTitleHealth = "Salute e alimentazione";
+const String tBehavior = "Comportamento";
+const String tSubTitleRegistry = "Dati generali";
+const String tSubTitleHealth = "Dati sanitari e nutrizionali";
+const String tSubTitleBehavioral = "Benessere emotivo";
+const String tSelectedGender = "Seleziona il sesso";
+

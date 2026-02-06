@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Maschio",
+    "abbreviation": "M"
+  },
+  {
+    "id": 2,
+    "name": "Femmina",
+    "abbreviation": "F"
+  }
+]

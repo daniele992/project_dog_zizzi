@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Alto",
+    "code": "A"
+  },
+  {
+    "id": 2,
+    "name": "Medio",
+    "code": "M"
+  },
+  {
+    "id": 3,
+    "name": "Medio",
+    "code": "M"
+  },
+  {
+    "id": 4,
+    "name": "Sconosciuto",
+    "code": "S"
+  }
+]

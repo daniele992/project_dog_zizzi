@@ -4,6 +4,7 @@ import 'package:project_dog_zizzi/ui/views/listUtents/listUtents.dart';
 import '../../../core/constants/image_strings.dart';
 import '../../../core/constants/text_strings.dart';
 import '../../../core/providers/authRepository/user_provider.dart';
+import '../../widgets/dialog_add_dog.dart';
 import '../../widgets/homepageAppBar.dart';
 
 final pageIndexProvider = StateProvider<int>((ref) => 0);
@@ -49,7 +50,10 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
         body: pages[pageIndex],
         floatingActionButton:FloatingActionButton(
           onPressed: (){
-            print(isAdmin);
+            showDialog(
+                context: context,
+                builder: (_) => const ShowDialogAddDog(),
+            );
           },
           tooltip: isAdmin.when(
               loading: () => tLoading,
