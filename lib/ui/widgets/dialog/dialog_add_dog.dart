@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/core/constants/text_strings.dart';
 
-import '../../core/utils/validators/form_add_dog_validators.dart';
-import 'dropdownGender.dart';
+import '../../../core/providers/dropdownAddDog/dropdown_add_dog_provider.dart';
+import '../../../core/utils/validators/form_add_dog_validators.dart';
+import '../dropdown/dropdownGender.dart';
+import '../dropdown/dropdown_form_field_dog.dart';
 
 class ShowDialogAddDog extends ConsumerStatefulWidget {
   const ShowDialogAddDog({super.key});
@@ -86,7 +88,6 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                         controller: nameDog,
                         decoration: const InputDecoration(
                           labelText: tName,
-                          border: OutlineInputBorder(),
                         ),
                         validator: FormDogValidator.validateNameDog,
                       ),
@@ -97,22 +98,20 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                         controller: ageDog,
                         decoration: const InputDecoration(
                           labelText: tAgeDog,
-                          border: OutlineInputBorder(),
                         ),
                         validator: FormDogValidator.validateAgeDog,
                       ),
                       const SizedBox(height: 12),
 
-                      //Genere
-                      /*TextFormField(
-                        controller: genderDog,
-                        decoration: const InputDecoration(
-                          labelText: tGenderDog,
-                          border: OutlineInputBorder(),
-                        ),
-                      ), */
-
-                      const DropDownGender(),
+                     //Sesso
+                     DropDownFormFieldDog(
+                        asyncProvider: ref.watch(genderProvider), // AsyncValue<List<GenderDog>>
+                        selectedProvider: genderSelectedProvider, // StateProvider<GenderDog?>
+                        labelText: tGenderDog,
+                        hintText: tSelectedGender,
+                        getItemLabel: (gender) => gender.name ?? '',
+                        validator: (value) => value == null ? 'Seleziona un genere valido' : null,
+                      ),
 
                       const SizedBox(height: 12),
 
@@ -121,7 +120,6 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                         controller: breedDog,
                         decoration: const InputDecoration(
                           labelText: tBreedDog,
-                          border: OutlineInputBorder(),
                         ),
                         validator: FormDogValidator.validateBreed,
                       ),
@@ -157,7 +155,6 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                         controller: allergyDog,
                         decoration: const InputDecoration(
                           labelText: tAllergyDog,
-                          border: OutlineInputBorder(),
                         ),
                         validator: FormDogValidator.validateNameDog,
                       ),
@@ -168,7 +165,6 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                         controller: typeFoodDog,
                         decoration: const InputDecoration(
                           labelText: tTypeFoodDog,
-                          border: OutlineInputBorder(),
                         ),
                         validator: FormDogValidator.validateAgeDog,
                       ),
@@ -179,7 +175,6 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                         controller: foodIntolerancesDog,
                         decoration: const InputDecoration(
                           labelText: tFoodIntolerancesDog,
-                          border: OutlineInputBorder(),
                         ),
                       ),
                       const SizedBox(height: 12),
@@ -189,7 +184,6 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                         controller: pathologiesDog,
                         decoration: const InputDecoration(
                           labelText: tPathologiesDog,
-                          border: OutlineInputBorder(),
                         ),
                       ),
                       const SizedBox(height: 12),
@@ -199,7 +193,6 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                         controller: notesHealth,
                         decoration: const InputDecoration(
                           labelText: tNoteHealthDog,
-                          border: OutlineInputBorder(),
                         ),
                         validator: FormDogValidator.validateBreed,
                       ),
@@ -235,7 +228,6 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                         controller: socializationDog,
                         decoration: const InputDecoration(
                           labelText: tSocializationDog,
-                          border: OutlineInputBorder(),
                         ),
                         validator: FormDogValidator.validateNameDog,
                       ),
@@ -246,19 +238,19 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                         controller: fearsOrPhobias,
                         decoration: const InputDecoration(
                           labelText: tFearsOrPhobiasDog,
-                          border: OutlineInputBorder(),
                         ),
                         validator: FormDogValidator.validateAgeDog,
                       ),
                       const SizedBox(height: 12),
 
                       //Livello energia
-                      TextFormField(
-                        controller: energyLevel,
-                        decoration: const InputDecoration(
-                          labelText: tEnergyLevelDog,
-                          border: OutlineInputBorder(),
-                        ),
+                      DropDownFormFieldDog(
+                        asyncProvider: ref.watch(energyLevelProvider), // AsyncValue<List<GenderDog>>
+                        selectedProvider: energyLevelSelectedProvider, // StateProvider<GenderDog?>
+                        labelText: tEnergyLevelDog,
+                        hintText: tSelectedEnergyLevel,
+                        getItemLabel: (energyLevel) => energyLevel.name ?? '',
+                        validator: (value) => value == null ? 'Seleziona un valore valido' : null,
                       ),
                       const SizedBox(height: 12),
 
@@ -267,7 +259,6 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                         controller: notesBehavioral,
                         decoration: const InputDecoration(
                           labelText: tNoteBehavioralDog,
-                          border: OutlineInputBorder(),
                         ),
                         validator: FormDogValidator.validateBreed,
                       ),

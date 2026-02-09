@@ -4,6 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/data/models/dog_energy_level_model.dart';
 import 'package:project_dog_zizzi/data/models/dog_gender_model.dart';
 
+/*
+* Carica i dati JSON dal bundle
+* Converte ogni oggetto in un GenderDog
+* Restituisce una lista List<GenderDog>
+* è un future provider quindi si può usare asyncValue.when(...)
+* */
+
 final genderProvider = FutureProvider<List<GenderDog>> ((ref) async {
     final jsonStr = await rootBundle.loadString('assets/json/genderDog.json');
     final List list = jsonDecode(jsonStr);

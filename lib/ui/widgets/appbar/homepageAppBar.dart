@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../core/constants/colors.dart';
-import '../../core/constants/image_strings.dart';
-import '../../core/constants/text_strings.dart';
-import '../../core/providers/authRepository/user_provider.dart';
+import '../../../core/constants/colors.dart';
+import '../../../core/constants/image_strings.dart';
+import '../../../core/constants/text_strings.dart';
+import '../../../core/providers/authRepository/user_provider.dart';
 
 class HomepageAppbar extends ConsumerWidget implements PreferredSizeWidget {
   const HomepageAppbar({super.key, required this.isDark});

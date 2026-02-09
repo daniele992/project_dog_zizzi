@@ -2,11 +2,11 @@
   {
     "id": 1,
     "name": "Maschio",
-    "abbreviation": "M"
+    "code": "M"
   },
   {
     "id": 2,
     "name": "Femmina",
-    "abbreviation": "F"
+    "code": "F"
   }
 ]

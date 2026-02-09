@@ -4,8 +4,8 @@ import 'package:project_dog_zizzi/ui/views/listUtents/listUtents.dart';
 import '../../../core/constants/image_strings.dart';
 import '../../../core/constants/text_strings.dart';
 import '../../../core/providers/authRepository/user_provider.dart';
-import '../../widgets/dialog_add_dog.dart';
-import '../../widgets/homepageAppBar.dart';
+import '../../widgets/dialog/dialog_add_dog.dart';
+import '../../widgets/appbar/homepageAppBar.dart';
 
 final pageIndexProvider = StateProvider<int>((ref) => 0);
 

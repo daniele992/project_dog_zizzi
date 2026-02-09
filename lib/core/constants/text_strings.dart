@@ -103,4 +103,5 @@ const String tSubTitleRegistry = "Dati generali";
 const String tSubTitleHealth = "Dati sanitari e nutrizionali";
 const String tSubTitleBehavioral = "Benessere emotivo";
 const String tSelectedGender = "Seleziona il sesso";
+const String tSelectedEnergyLevel = "Seleziona il livello di energia";
 

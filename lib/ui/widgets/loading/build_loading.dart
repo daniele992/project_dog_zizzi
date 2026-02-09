@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/constants/text_strings.dart';
+import '../../../core/constants/text_strings.dart';
 
 Widget buildLoading(){
   return const Center(

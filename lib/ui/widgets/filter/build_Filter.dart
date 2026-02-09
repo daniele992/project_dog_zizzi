@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/core/providers/filter/user_filter_provider.dart';
 import 'package:project_dog_zizzi/core/providers/user/user_providers.dart';
-import '../../core/constants/text_strings.dart';
+import '../../../core/constants/text_strings.dart';
 
 Widget buildFilter(WidgetRef ref, bool? filter){
   return Center(
