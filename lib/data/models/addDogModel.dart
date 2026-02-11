@@ -3,14 +3,14 @@ import 'package:project_dog_zizzi/core/constants/text_strings.dart';
 class RegistryModel {
   final int ownerId; //Chiave esterna
   final String name;
-  final int? age;
+  final int age;
   final String gender;
   final String breed;
 
   const RegistryModel({
     required this.ownerId,
     required this.name,
-    this.age,
+    required this.age,
     required this.gender,
     required this.breed,
   });
@@ -18,7 +18,7 @@ class RegistryModel {
   Map<String, dynamic> toJson() =>{
     'ownerId': ownerId,
     'name': name,
-    'age': age ?? 0,
+    'age': age,
     'gender': gender,
     'breed': breed,
   };

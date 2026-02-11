@@ -5,7 +5,7 @@ import 'package:project_dog_zizzi/data/models/addDogModel.dart';
 AddDogModel mapFormToAddDogModel({
 required int ownerId,
 required String name,
-required String age,
+required int age,
 required String gender,
 required String breed,
 required String allergy,
@@ -22,6 +22,7 @@ required String notesBehavioral,
       registry: RegistryModel(
           ownerId: ownerId,
           name: name,
+          age: age,
           gender: gender,
           breed: breed
       ),

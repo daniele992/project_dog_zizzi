@@ -71,16 +71,17 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  IconButton(
-                      icon: Icon(
-                        Icons.home,
-                        color: pageIndex == 0 ? Colors.blue : Colors.grey,
+                  isAdmin.when(
+                      data: (isAdmin) => IconButton(
+                          onPressed: () => ref.read(pageIndexProvider.notifier).state = 0,
+                          icon: Icon( isAdmin ? Icons.people_alt : Icons.pets),
                       ),
-                    onPressed: () => ref.read(pageIndexProvider.notifier).state = 0,
+                      error: (e, st) => Text('Errore: $e') ,
+                      loading: () => const CircularProgressIndicator(),
                   ),
                   IconButton(
                       icon: Icon(
-                        Icons.search,
+                        Icons.article,
                         color: pageIndex == 1 ? Colors.blue : Colors.grey,
                       ),
                     onPressed: () => ref.read(pageIndexProvider.notifier).state = 1,
@@ -88,14 +89,14 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
                   const SizedBox(width: 40), //Space for the FAB
                   IconButton(
                     icon: Icon(
-                      Icons.home,
+                      Icons.calculate,
                       color: pageIndex == 2 ? Colors.blue : Colors.grey,
                     ),
                     onPressed: () => ref.read(pageIndexProvider.notifier).state = 2,
                   ),
                   IconButton(
                       icon: Icon(
-                        Icons.home,
+                        Icons.event,
                         color: pageIndex == 3 ? Colors.blue : Colors.grey
                       ),
                     onPressed: () => ref.read(pageIndexProvider.notifier).state = 3,

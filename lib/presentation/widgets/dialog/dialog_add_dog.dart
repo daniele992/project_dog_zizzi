@@ -303,6 +303,7 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                               const SizedBox(width: 12),
                               Expanded(
                                 child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                                   onPressed: state.isLoading
                                       ?  null
                                       : () {
@@ -314,7 +315,7 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                                       final model = mapFormToAddDogModel(
                                           ownerId: 1,
                                           name: nameDog.text,
-                                          age: ageDog.text,
+                                          age: int.tryParse(ageDog.text) ?? 0, //Converto in int perchè dal form mi arriva una stringa
                                           gender: genderCodeToSave ?? 'S',
                                           breed: breedDog.text,
                                           allergy: allergyDog.text,

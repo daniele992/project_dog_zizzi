@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../data/models/listUsers_model.dart';
 import 'admin_badge.dart';
+import 'dialog/delete_user_dialog.dart';
 
 class UserCard extends StatelessWidget {
   final UserModel user;
@@ -40,7 +41,9 @@ class UserCard extends StatelessWidget {
                 AdminBadge(isAdmin: user.admin),
                 IconButton(
                   icon: const Icon(Icons.delete_outline, color: Colors.red),
-                  onPressed: () {}, // solo UI per ora
+                  onPressed: () {
+                    return showDeleteUser(context);
+                  }, // solo UI per ora
                 ),
               ],
             ),
@@ -98,7 +101,7 @@ class UserCard extends StatelessWidget {
                   icon: const Icon(Icons.add_circle),
                   onPressed: (){},
               ),
-            )
+            ),
 
           ],
         ),
