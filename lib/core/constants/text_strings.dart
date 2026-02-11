@@ -59,6 +59,7 @@ const String tUnexpectedError = "Errore imprevisto:";
 const String tGeneralError = "Errore";
 const String tErrorDownloadUser = "Errore caricamento utenti";
 const String tErrorNoToken = "Token non disponibile";
+const String tErrorDuringSave = "Errore durante il salvataggio: ";
 
 // ------------ HOMEPAGE ------------
 const String tProfile = "Profilo";
@@ -104,4 +105,5 @@ const String tSubTitleHealth = "Dati sanitari e nutrizionali";
 const String tSubTitleBehavioral = "Benessere emotivo";
 const String tSelectedGender = "Seleziona il sesso";
 const String tSelectedEnergyLevel = "Seleziona il livello di energia";
+const String tSuccessAddDog = "Amico a quattro zampe aggiunto con successo!";
 
