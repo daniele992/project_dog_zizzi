@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:project_dog_zizzi/data/models/listUsers_model.dart';
-import 'package:project_dog_zizzi/ui/widgets/user_card.dart';
-
+import 'package:project_dog_zizzi/presentation/widgets/user_card.dart';
 
 Widget buildResponsiveList(List<UserModel> users){
   return LayoutBuilder(

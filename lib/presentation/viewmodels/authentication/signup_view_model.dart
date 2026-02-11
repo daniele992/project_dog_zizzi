@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_dog_zizzi/ui/viewmodels/authentication/sign_up_state.dart';
+import 'package:project_dog_zizzi/presentation/viewmodels/authentication/sign_up_state.dart';
 import '../../../core/constants/text_strings.dart';
 import '../../../data/datasources/remote/auth_remote_datasource.dart';
 import '../../../data/models/user_registration_model.dart';

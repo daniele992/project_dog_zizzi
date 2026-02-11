@@ -3,8 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:project_dog_zizzi/data/repositories/auth_repository_impl.dart';
 import 'package:project_dog_zizzi/domain/usecases/register_user.dart';
 import '../../../data/datasources/remote/auth_remote_datasource.dart';
-import '../../../ui/viewmodels/authentication/sign_up_state.dart';
-import '../../../ui/viewmodels/authentication/signup_view_model.dart';
+import '../../../presentation/viewmodels/authentication/sign_up_state.dart';
+import '../../../presentation/viewmodels/authentication/signup_view_model.dart';
+
 
 //Datasource
 final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {

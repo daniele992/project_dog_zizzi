@@ -5,7 +5,8 @@ import 'package:project_dog_zizzi/core/providers/token/auth_token_provider.dart'
 import '../../../data/datasources/remote/auth_api.dart';
 import '../../../data/repositories/login_repository_impl.dart';
 import '../../../domain/usecases/login_user.dart';
-import '../../../ui/viewmodels/authentication/signIn_view_model.dart';
+import '../../../presentation/viewmodels/authentication/signIn_view_model.dart';
+
 
 
 final httpClientProvider = Provider((_) => http.Client());

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_dog_zizzi/presentation/views/splash_screen/splash_screen.dart';
 import 'package:project_dog_zizzi/routes/app_routes.dart';
-import 'package:project_dog_zizzi/ui/views/splash_screen/splash_screen.dart';
 import 'core/utils/themes/theme.dart';
 
 void main() {

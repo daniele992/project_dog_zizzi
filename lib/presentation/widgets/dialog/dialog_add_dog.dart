@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/core/constants/text_strings.dart';
-
-import '../../../core/providers/dropdownAddDog/dropdown_add_dog_provider.dart';
+import 'package:project_dog_zizzi/core/providers/addDog/add_dog_providers.dart';
+import 'package:project_dog_zizzi/data/models/addDogModel.dart';
+import 'package:project_dog_zizzi/presentation/mappers/add_dog_form_mapper.dart';
+import '../../../core/providers/addDog/dropdown_add_dog_provider.dart';
 import '../../../core/utils/validators/form_add_dog_validators.dart';
 import '../dropdown/dropdownGender.dart';
 import '../dropdown/dropdown_form_field_dog.dart';
@@ -239,7 +241,6 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                         decoration: const InputDecoration(
                           labelText: tFearsOrPhobiasDog,
                         ),
-                        validator: FormDogValidator.validateAgeDog,
                       ),
                       const SizedBox(height: 12),
 
@@ -281,7 +282,48 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              final selectedEnergyLevel = ref.read(energyLevelSelectedProvider);
+                              final String? energyLevelCodeToSave = selectedEnergyLevel?.code;
+                              final selectedGender = ref.read(genderSelectedProvider);
+                              final String? genderCodeToSave = selectedGender?.code;
+                              if(_formKey.currentState!.validate()){
+                                final model = mapFormToAddDogModel( //Mapp dei dati del form
+                                    ownerId: 1,
+                                    name: nameDog.text,
+                                    age: ageDog.text,
+                                    gender: genderCodeToSave ?? '',
+                                    breed:  breedDog.text,
+                                    allergy: allergyDog.text,
+                                    foodIntolerances: foodIntolerancesDog.text,
+                                    typeFood: typeFoodDog.text,
+                                    pathologies: pathologiesDog.text,
+                                    notesHealth: notesHealth.text,
+                                    socialization: socializationDog.text,
+                                    fearsOrPhobias: fearsOrPhobias.text,
+                                    energyLevel: energyLevelCodeToSave ?? '',
+                                    notesBehavioral: notesBehavioral.text
+                                );
+
+                                //Mostra loader opzionale
+                                // setState(() => isLoading = true);
+                                try{
+                                  //Chiamata asincrona al ViewModel
+                                  await ref.read(addDogViewModelProvider.notifier).addDog(model);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Cane aggiunto con successo!')),
+                                  );
+                                } catch (e) {
+                                  // Gestione errori
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Errore durante il salvataggio: $e')),
+                                  );
+                                } finally {
+                                  // Nascondi loader se presente
+                                  // setState(() => isLoading = false);
+                                }
+                              }
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
                               foregroundColor: Colors.white,

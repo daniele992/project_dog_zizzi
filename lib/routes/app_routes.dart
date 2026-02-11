@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:project_dog_zizzi/ui/views/authentication/signIn_view.dart';
-import 'package:project_dog_zizzi/ui/views/authentication/signUp_view.dart';
-import '../ui/views/conditions/conditions.dart';
-import '../ui/views/homepage/home_page.dart';
-import '../ui/views/privacy/privacy.dart';
+import '../presentation/views/authentication/signIn_view.dart';
+import '../presentation/views/authentication/signUp_view.dart';
+import '../presentation/views/conditions/conditions.dart';
+import '../presentation/views/homepage/home_page.dart';
+import '../presentation/views/privacy/privacy.dart';
 
 class AppRoutes {
   static const login = '/login';

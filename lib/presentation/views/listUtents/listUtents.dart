@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/core/providers/filter/user_filter_provider.dart';
 import 'package:project_dog_zizzi/core/providers/user/user_providers.dart';
-import 'package:project_dog_zizzi/ui/widgets/loading/build_loading.dart';
-import 'package:project_dog_zizzi/ui/widgets/responsive_grid.dart';
 import '../../widgets/filter/build_Filter.dart';
+import '../../widgets/loading/build_loading.dart';
+import '../../widgets/responsive_grid.dart';
 
 class ListUsers extends ConsumerStatefulWidget {
   const ListUsers({super.key});
