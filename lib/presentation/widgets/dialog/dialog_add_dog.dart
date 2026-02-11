@@ -39,6 +39,25 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
 
   @override
   Widget build(BuildContext context) {
+
+    ref.listen<AsyncValue<void>>(addDogViewModelProvider, (previous, next) {
+      next.whenOrNull(
+        data: (_) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Cane aggiunto con successo!')),
+          );
+          Navigator.of(context).pop();
+        },
+        error: (error, _) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Errore: $error')),
+          );
+        },
+      );
+    });
+
+    final state = ref.watch(addDogViewModelProvider);
+
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -107,10 +126,8 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
 
                               //Sesso
                               DropDownFormFieldDog(
-                                asyncProvider: ref.watch(
-                                    genderProvider), // AsyncValue<List<GenderDog>>
-                                selectedProvider:
-                                    genderSelectedProvider, // StateProvider<GenderDog?>
+                                asyncProvider: ref.watch(genderProvider), // AsyncValue<List<GenderDog>>
+                                selectedProvider: genderSelectedProvider, // StateProvider<GenderDog?>
                                 labelText: tGenderDog,
                                 hintText: tSelectedGender,
                                 getItemLabel: (gender) => gender.name ?? '',
@@ -250,14 +267,11 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
 
                               //Livello energia
                               DropDownFormFieldDog(
-                                asyncProvider: ref.watch(
-                                    energyLevelProvider), // AsyncValue<List<GenderDog>>
-                                selectedProvider:
-                                    energyLevelSelectedProvider, // StateProvider<GenderDog?>
+                                asyncProvider: ref.watch(energyLevelProvider), // AsyncValue<List<GenderDog>>
+                                selectedProvider: energyLevelSelectedProvider, // StateProvider<GenderDog?>
                                 labelText: tEnergyLevelDog,
                                 hintText: tSelectedEnergyLevel,
-                                getItemLabel: (energyLevel) =>
-                                    energyLevel.name ?? '',
+                                getItemLabel: (energyLevel) => energyLevel.name ?? '',
                                 validator: (value) => value == null
                                     ? 'Seleziona un valore valido'
                                     : null,
@@ -289,54 +303,37 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                               const SizedBox(width: 12),
                               Expanded(
                                 child: ElevatedButton(
-                                    onPressed: () async {
+                                  onPressed: state.isLoading
+                                      ?  null
+                                      : () {
+                                    if(_formKey.currentState!.validate()) {
                                       final selectedEnergyLevel = ref.read(energyLevelSelectedProvider);
                                       final String? energyLevelCodeToSave = selectedEnergyLevel?.code;
                                       final selectedGender = ref.read(genderSelectedProvider);
                                       final String? genderCodeToSave = selectedGender?.code;
-                                      if (_formKey.currentState!.validate()) {
-                                        final model = mapFormToAddDogModel(
-                                            //Mapp dei dati del form
-                                            ownerId: 1,
-                                            name: nameDog.text,
-                                            age: ageDog.text,
-                                            gender: genderCodeToSave ?? '',
-                                            breed: breedDog.text,
-                                            allergy: allergyDog.text,
-                                            foodIntolerances: foodIntolerancesDog.text,
-                                            typeFood: typeFoodDog.text,
-                                            pathologies: pathologiesDog.text,
-                                            notesHealth: notesHealth.text,
-                                            socialization: socializationDog.text,
-                                            fearsOrPhobias: fearsOrPhobias.text,
-                                            energyLevel: energyLevelCodeToSave ?? '',
-                                            notesBehavioral: notesBehavioral.text);
-
-                                        //Mostra loader opzionale
-                                        // setState(() => isLoading = true);
-                                        try {
-                                          //Chiamata asincrona al ViewModel
-                                          await ref.read(addDogViewModelProvider.notifier).addDog(model);
-                                          if(!mounted) return; //mounted verifica che il widhet sia ancora presente nell'albero e il context sia ancora valido
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                            const SnackBar(content: Text(tSuccessAddDog)),
-                                          );
-                                        } catch (e) {
-                                          // Gestione errori
-                                          if(!mounted) return;
-                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$tErrorDuringSave $e')),
-                                          );
-                                        } finally {
-                                          // Nascondi loader se presente
-                                          // setState(() => isLoading = false);
-                                        }
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.green,
-                                      foregroundColor: Colors.white,
-                                    ),
-                                    child: const Text(tSave)),
+                                      final model = mapFormToAddDogModel(
+                                          ownerId: 1,
+                                          name: nameDog.text,
+                                          age: ageDog.text,
+                                          gender: genderCodeToSave ?? 'S',
+                                          breed: breedDog.text,
+                                          allergy: allergyDog.text,
+                                          foodIntolerances: foodIntolerancesDog.text,
+                                          typeFood: typeFoodDog.text,
+                                          pathologies: pathologiesDog.text,
+                                          notesHealth: notesHealth.text,
+                                          socialization: socializationDog.text,
+                                          fearsOrPhobias: fearsOrPhobias.text,
+                                          energyLevel: energyLevelCodeToSave ?? 'S',
+                                          notesBehavioral: notesBehavioral.text
+                                      );
+                                      ref.read(addDogViewModelProvider.notifier).addDog(model);
+                                    }
+                                  },
+                                  child: state.isLoading
+                                      ? const CircularProgressIndicator(color: Colors.white)
+                                      : const Text(tSave),
+                                )
                               )
                             ],
                           )

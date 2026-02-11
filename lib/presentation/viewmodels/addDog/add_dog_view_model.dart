@@ -1,27 +1,24 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/data/models/addDogModel.dart';
-import 'package:project_dog_zizzi/domain/usecases/add_dog.dart';
+import '../../../domain/usecases/add_dog.dart';
 
-class AddDogState {
-  final bool isLoading;
-  final String? error;
 
-  const AddDogState({this.isLoading = false, this.error});
-}
+class AddDogViewModel extends StateNotifier<AsyncValue<void>>{
+  final AddDogUseCase _addDogUseCase;
 
-class AddDogViewModel extends StateNotifier<AddDogState>{
-  final AddDogUseCase addDogUseCase;
+  AddDogViewModel(this._addDogUseCase) : super(const AsyncData(null));
 
-  AddDogViewModel(this.addDogUseCase) : super(const AddDogState());
+  Future<void> addDog(AddDogModel model) async {
+    state = const AsyncLoading();
 
-  Future<void> addDog(AddDogModel dog) async {
-    state = const AddDogState(isLoading: true);
-
-    try{
-      await addDogUseCase(dog);
-      state = const AddDogState();
-    } catch (e) {
-     state = AddDogState(error: e.toString());
-    }
+    /*
+    AsyncValue.guard gestisce automaticamente: Try, Catch, Error, Loading
+    Riperpood + progettato per lavorare con stati asincroni.
+    AsyncValue è: Reattivo, Sicuro, Standard Riverpood, Minimal.
+    è il modo ufficiale consigliato
+    */
+    state = await AsyncValue.guard(() async {
+      await _addDogUseCase(model);
+    });
   }
 }

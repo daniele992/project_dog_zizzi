@@ -20,7 +20,8 @@ final addDogUseCaseProvider = Provider(
     (ref) => AddDogUseCase(ref.read(addDogRepositoryProvider)),
 );
 
-final addDogViewModelProvider = StateNotifierProvider<AddDogViewModel, AddDogState>(
-    (ref) => AddDogViewModel(ref.read(addDogUseCaseProvider)),
+final addDogViewModelProvider =
+StateNotifierProvider<AddDogViewModel, AsyncValue<void>>(
+     (ref) => AddDogViewModel(ref.read(addDogUseCaseProvider)),
 );
 
