@@ -42,7 +42,7 @@ class UserCard extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.delete_outline, color: Colors.red),
                   onPressed: () {
-                    return showDeleteUser(context);
+                    return showDeleteUser(context, user);
                   }, // solo UI per ora
                 ),
               ],

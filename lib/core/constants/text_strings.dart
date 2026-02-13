@@ -107,3 +107,6 @@ const String tSelectedGender = "Seleziona il sesso";
 const String tSelectedEnergyLevel = "Seleziona il livello di energia";
 const String tSuccessAddDog = "Amico a quattro zampe aggiunto con successo!";
 
+// ------------ DELETE USER ------------
+const String tSecureDeleteUser = "Sei sicuro di voler eliminare questo utente?";
+const String tConfirmDeletion = "Conferma eliminazione";
