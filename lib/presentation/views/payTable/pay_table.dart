@@ -14,9 +14,9 @@ class _PayTable extends ConsumerState<PayTable> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        const Center(
+        Center(
           //Title
           child: Text(
             tTitleTablePayment,
@@ -27,26 +27,7 @@ class _PayTable extends ConsumerState<PayTable> {
             ),
           ),
         ),
-        Row(
-          children: [
-            TextFormField(
-             // controller: ,
-              decoration: const InputDecoration(
-                labelText: tNoteBehavioralDog,
-              ),
-            ),
-            TextFormField(
-             // controller: ,
-              decoration: const InputDecoration(
-                labelText: tNoteBehavioralDog,
-              ),
-            ),
-            ElevatedButton(
-                onPressed: (){},
-                child: const Text("Salva"),
-            ),
-          ],
-        )
+
       ],
     );
   }

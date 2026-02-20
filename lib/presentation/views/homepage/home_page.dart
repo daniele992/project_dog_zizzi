@@ -11,7 +11,7 @@ import '../listUtents/listUtents.dart';
 final pageIndexProvider = StateProvider<int>((ref) => 0);
 
 
-class MyHomePage extends ConsumerStatefulWidget {
+class MyHomePage extends ConsumerStatefulWidget { //dentro un consumer statefulWidget ho accesso al ref
   const MyHomePage({super.key});
 
   @override
@@ -51,12 +51,26 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
         ),
         body: pages[pageIndex],
         floatingActionButton:FloatingActionButton(
+          //TODO devo cambiare onpressed i base ad admin o no, se admin creo post senno creo cane
           onPressed: (){
-            showDialog(
-                context: context,
-                builder: (_) => const ShowDialogAddDog(),
+            isAdmin.when(
+                error: (_, __) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Errore Permessi"))
+                  );
+                },
+                loading: (){},
+                data: (admin) {
+                  showDialog(
+                      context: context,
+                      builder: (_) => admin
+                          ? const ShowDialogAddDog()
+                          : const ShowDialogAddDog()
+                  );
+                }
             );
           },
+
           tooltip: isAdmin.when(
               loading: () => tLoading,
               data: (value) => value ? tAddPosts : tAddDogs,
