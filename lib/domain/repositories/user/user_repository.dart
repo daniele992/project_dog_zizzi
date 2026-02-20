@@ -8,4 +8,5 @@ IL REPOSITORY E' IL CERVELLO LOGISTICO DEI DATI. DECIDE DA DOVE ARRIVANO MA NON 
 ///Serve come contratto
 abstract class UserRepository {
   Future<List<UserModel>> getUsers({bool? isAdmin});
+  Future<void> deleteUser(int id); //Oppure String id (in base al model)
 }

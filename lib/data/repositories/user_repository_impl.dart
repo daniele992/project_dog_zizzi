@@ -26,4 +26,18 @@ class UserRepositoryImpl implements UserRepository{
       isAdmin: isAdmin,
     );
   }
+
+  @override
+  Future<void> deleteUser(int id) async {
+    final token = await tokenStorage.getToken();
+
+    if(token == null){
+      throw Exception(tErrorNoToken);
+    }
+
+    await remoteDatasource.deleteUser(
+      token: token,
+      id: id,
+    );
+  }
 }

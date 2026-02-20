@@ -3,7 +3,7 @@ import 'package:project_dog_zizzi/presentation/viewmodels/authentication/sign_up
 import '../../../core/constants/text_strings.dart';
 import '../../../data/datasources/remote/auth_remote_datasource.dart';
 import '../../../data/models/user_registration_model.dart';
-import '../../../domain/usecases/register_user.dart';
+import '../../../domain/usecases/user/register_user.dart';
 
 
 class SignUpViewModel extends StateNotifier<SignUpState> {

@@ -109,4 +109,11 @@ const String tSuccessAddDog = "Amico a quattro zampe aggiunto con successo!";
 
 // ------------ DELETE USER ------------
 const String tSecureDeleteUser = "Sei sicuro di voler eliminare questo utente?";
-const String tConfirmDeletion = "Conferma eliminazione";
+const String tConfirmDeletion = "CONFERMA ELIMINAZIONE";
+const String tDeleteData = "(Questa azione eliminerà anche tutti i dati collegati)";
+const String tGeneralErrorDelete = "Errore durante eliminazione";
+const String tErrorFinishSession = "Sessione scaduta, effettua nuovamente il login";
+const String tErrorNoPermissionDelete= "Non hai i permessi per eliminare questo utente";
+
+// ------------ PAY TABLE ------------
+const String tTitleTablePayment = "TABELLA DEI PAGAMENTI";

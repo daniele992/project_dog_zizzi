@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_dog_zizzi/presentation/views/payTable/pay_table.dart';
 import '../../../core/constants/image_strings.dart';
 import '../../../core/constants/text_strings.dart';
 import '../../../core/providers/authRepository/user_provider.dart';
@@ -28,6 +29,7 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
 
     final List<Widget> pages = [
       const ListUsers(),
+      const PayTable(),
     ];
 
     return SafeArea(

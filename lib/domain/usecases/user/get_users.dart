@@ -1,7 +1,7 @@
 import 'package:project_dog_zizzi/data/models/listUsers_model.dart';
-import '../repositories/user/user_repository.dart';
+import '../../repositories/user/user_repository.dart';
 
-/* Un UseCasen rappresenta un azione del dominio: "Ottieni utenti", "Login utente"
+/* Un UseCase rappresenta un azione del dominio: "Ottieni utenti", "Login utente"
 è il cuore della clean architecture e non sa nulla di: HTTP, TOKEN, API, DATABASE
 lo UseCase descrive COSA vuoi fare e non COME vuoi farlo*/
 

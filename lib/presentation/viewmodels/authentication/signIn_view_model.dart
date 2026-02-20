@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/services/token_service.dart';
 import '../../../data/models/login_request_model.dart';
-import '../../../domain/usecases/login_user.dart';
+import '../../../domain/usecases/user/login_user.dart';
 
 class LoginViewModel extends StateNotifier<AsyncValue<bool>> {
   final LoginUser loginUser;

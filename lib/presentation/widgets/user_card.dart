@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/listUsers_model.dart';
 import 'admin_badge.dart';
 import 'dialog/delete_user_dialog.dart';
 
-class UserCard extends StatelessWidget {
+class UserCard extends ConsumerWidget {
   final UserModel user;
 
   const UserCard({super.key, required this.user});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       elevation: 6,
       shape: RoundedRectangleBorder(
@@ -42,7 +43,11 @@ class UserCard extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.delete_outline, color: Colors.red),
                   onPressed: () {
-                    return showDeleteUser(context, user);
+                    showDeleteUser(
+                        context,
+                        ref,
+                        user,
+                    );
                   }, // solo UI per ora
                 ),
               ],

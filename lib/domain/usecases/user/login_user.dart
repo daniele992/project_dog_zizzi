@@ -1,5 +1,5 @@
-import '../../data/models/login_request_model.dart';
-import '../repositories/authentication/login_repository.dart';
+import '../../../data/models/login_request_model.dart';
+import '../../repositories/authentication/login_repository.dart';
 
 class LoginUser {
   final LoginRepository repository;

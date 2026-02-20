@@ -6,9 +6,7 @@ import '../../../core/constants/text_strings.dart';
 ///Questa classe parla solo con l'API remota
 class UserRemoteDatasource {
   final String baseUrl;
-
-  //Costruttore. Devo fornire l'URL del server e il token.
-  UserRemoteDatasource({required this.baseUrl});
+  UserRemoteDatasource({required this.baseUrl});  //Costruttore. Devo fornire l'URL del server e il token.
 
   ///Metodo asincrono per tornare una lista di utenti
   Future<List<UserModel>> fetchUsers({required String token, bool? isAdmin}) async {
@@ -29,4 +27,28 @@ class UserRemoteDatasource {
     }
   }
 
+  Future<void> deleteUser({
+    required String token,
+    required int id,
+  }) async {
+
+    final uri = Uri.parse('$baseUrl/api/User/$id');
+
+    final response = await http.delete(
+      uri,
+      headers: {
+        'Authorization' : 'Bearer $token',
+        'Content-type' : 'application/json',
+      }
+    );
+
+    if(response.statusCode == 200 || response.statusCode == 204){
+      return; //delete avvenuta con successo
+    } else {
+      throw Exception('Errore durante eliminazione utente');
+    }
+  }
 }
+
+
+

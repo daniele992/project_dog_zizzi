@@ -1,11 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_dog_zizzi/data/repositories/auth_repository_impl.dart';
-import 'package:project_dog_zizzi/domain/usecases/register_user.dart';
+import 'package:project_dog_zizzi/domain/usecases/user/register_user.dart';
 import '../../../data/datasources/remote/auth_remote_datasource.dart';
 import '../../../presentation/viewmodels/authentication/sign_up_state.dart';
 import '../../../presentation/viewmodels/authentication/signup_view_model.dart';
 
+/*
+* UI non conosce HTTP
+* UI non conosce Token
+* UI non conosce Repository
+* UI conosce solo il viewModel
+* Questà è clean Architecture vera
+* */
 
 //Datasource
 final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {
