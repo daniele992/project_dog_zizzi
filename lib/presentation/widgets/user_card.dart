@@ -77,24 +77,41 @@ class UserCard extends ConsumerWidget {
             const SizedBox(height: 8),
 
             // TERMINI ACCETTATI
-            Text(
-                'Termini Accettati: ${user.acceptTerms ? 'Si' : 'No'}',
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey
+            Row(
+              children: [
+                const Text(
+                  'Termini Accettati: ',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey
+                  ),
                 ),
-
+                Icon(
+                  user.acceptTerms ? Icons.check_circle : Icons.cancel,
+                  color: user.acceptTerms ? Colors.green : Colors.red,
+                  size: 14,
+                ),
+              ],
             ),
 
             const SizedBox(height: 8),
 
             // CONDIZIONI ACCETTATE
-            Text(
-                'Condizioni Accettate: ${user.acceptPrivacy ? 'Si' : 'No'}',
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey
+            Row(
+              children: [
+                const Text(
+                  'Condizioni Accettate: ',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey
+                  ),
                 ),
+                Icon(
+                  user.acceptPrivacy ? Icons.check_circle : Icons.cancel,
+                  color: user.acceptPrivacy ? Colors.green : Colors.red,
+                  size: 14,
+                )
+              ],
             ),
 
             //ICONA PER MOSTRARE INFORMAZIONI AGGIUNTIVE, IN QUESTO CASO I CANI
