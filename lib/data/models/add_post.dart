@@ -1,17 +1,21 @@
 class Post{
   final int ownerId; //Chiave esterna
   final String title;
-  final String? subTitle;
+  final String subTitle;
   final String textPost;
   final String? imageUrl;
+  final String category;
+  final String priority;
 
   //Construttore
   const Post({
     required this.ownerId,
     required this.title,
-    this.subTitle,
+    required this.subTitle,
     required this.textPost,
     this.imageUrl,
+    required this.category,
+    required this.priority,
   });
 
   Map<String, dynamic> toJson() => {
@@ -24,7 +28,7 @@ class Post{
 }
 
 class SettingsPost {
-  final String titleColorHex;
+  final String? titleColorHex;
   final String? subTitleColorHex;
   final String? fontTitle;
   final String? fontSubTitle;

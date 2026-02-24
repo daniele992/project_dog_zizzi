@@ -61,6 +61,7 @@ class _ShowDialogAddPost extends ConsumerState<ShowDialogAddPost> {
                         iconColor: Colors.red,
                         children: [
                           const SizedBox(height: 6),
+
                           //Titolo Post
                           TextFormField(
                             controller: titlePost,
@@ -71,12 +72,22 @@ class _ShowDialogAddPost extends ConsumerState<ShowDialogAddPost> {
                           ),
                           const SizedBox(height: 12),
 
+                          //Sottotitolo post
+                          TextFormField(
+                            controller: titlePost,
+                            decoration: const InputDecoration(
+                              labelText: tSubTitlePost,
+                            ),
+                            validator: FormDogValidator.validateNameDog,
+                          ),
+                          const SizedBox(height: 12),
+
                           //Categoria
                           DropDownFormFieldDog(
                             asyncProvider: ref.watch(categoryPostProvider), // AsyncValue<List<GenderDog>>
                             selectedProvider: categorySelectedProvider, // StateProvider<GenderDog?>
-                            labelText: tGenderDog,
-                            hintText: tSelectedGender,
+                            labelText: tCategory,
+                            hintText: tSelectedCategory,
                             getItemLabel: (category) => category.name ?? '',
                             validator: (value) => value == null
                                 ? 'Seleziona una categoria valida'
@@ -84,14 +95,21 @@ class _ShowDialogAddPost extends ConsumerState<ShowDialogAddPost> {
                           ),
                           const SizedBox(height: 12),
 
-                          TextFormField(
-                            controller: titlePost,
-                            decoration: const InputDecoration(
-                              labelText: tTitlePost,
-                            ),
-                            validator: FormDogValidator.validateNameDog,
+                          //Priorità
+                          DropDownFormFieldDog(
+                            asyncProvider: ref.watch(priorityPostProvider), // AsyncValue<List<GenderDog>>
+                            selectedProvider: prioritySelectedProvider, // StateProvider<GenderDog?>
+                            labelText: tPriority,
+                            hintText: tSelectedPriority,
+                            getItemLabel: (priority) => priority.name ?? '',
+                            validator: (value) => value == null
+                                ? 'Seleziona una valore valido'
+                                : null,
                           ),
                           const SizedBox(height: 12),
+
+
+
 
                         ],
                       ),

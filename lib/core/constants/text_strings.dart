@@ -111,9 +111,14 @@ const String tSuccessAddDog = "Amico a quattro zampe aggiunto con successo!";
 
 // ------------ FORM POST ------------
 const String tTitleAddPost = "Aggiungi Post";
+const String tTitlePost = "Titolo";
+const String tSubTitlePost = "Sottotitolo";
 const String tTitleEssential = "Dati Essenziali";
-const tTitlePost = "Titolo Post";
-const tCategoryPost = "Categoria";
+const String tTitleSettings = "Impostazioni";
+const String tSelectedCategory = "Seleziona la categoria";
+const String tCategory = "Categoria";
+const String tPriority = "Priorità";
+const String tSelectedPriority = "Seleziona la priorità";
 
 // ------------ DELETE USER ------------
 const String tSecureDeleteUser = "Sei sicuro di voler eliminare questo utente?";
@@ -125,3 +130,9 @@ const String tErrorNoPermissionDelete= "Non hai i permessi per eliminare questo 
 
 // ------------ PAY TABLE ------------
 const String tTitleTablePayment = "TABELLA DEI PAGAMENTI";
+
+// ------------ ADD POST ------------
+const String tSelectedCategory = "Seleziona la categoria";
+const String tCategory = "Categoria";
+const String tPriority = "Priorità";
+const String tSelectedPriority = "Seleziona la priorità";
