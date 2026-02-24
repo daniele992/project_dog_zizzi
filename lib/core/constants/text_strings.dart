@@ -131,8 +131,5 @@ const String tErrorNoPermissionDelete= "Non hai i permessi per eliminare questo 
 // ------------ PAY TABLE ------------
 const String tTitleTablePayment = "TABELLA DEI PAGAMENTI";
 
-// ------------ ADD POST ------------
-const String tSelectedCategory = "Seleziona la categoria";
-const String tCategory = "Categoria";
-const String tPriority = "Priorità";
-const String tSelectedPriority = "Seleziona la priorità";
+
+
