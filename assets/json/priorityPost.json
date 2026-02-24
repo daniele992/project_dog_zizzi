@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Urgente",
+    "description": "Avviso urgente",
+    "abbreviation": "Ur",
+    "color": "Rosso,"
+  },
+  {
+    "id": 2,
+    "name": "Alta",
+    "description": "Avviso con priorità alta",
+    "abbreviation": "Al",
+    "color": "Arancione"
+  },
+  {
+    "id": 3,
+    "name": "Normale",
+    "description": "Avviso con priorità normale",
+    "abbreviation": "Nr",
+    "color": "Giallo"
+  },
+  {
+    "id": 4,
+    "name": "Bassa",
+    "description": "Avviso com priorità bassa",
+    "abbreviation": "Bs",
+    "color": "Verde"
+  }
+]

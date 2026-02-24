@@ -119,7 +119,11 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                       Center(
                         child: Column(
                           children: [
-                            Icon(LineAwesomeIcons.user, size: 70, color: Colors.blueGrey.shade700),
+                            Icon(
+                                LineAwesomeIcons.user,
+                                size: 70,
+                                color: Colors.blue.shade700
+                            ),
                             const SizedBox(height: 16),
                             Text(
                               tCreateAccount,

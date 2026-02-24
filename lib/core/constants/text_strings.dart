@@ -4,7 +4,9 @@ const String tName = "Nome";
 const String tSurname = "Cognome";
 const String tPassword = "Password";
 const String tCreateAccount = "Crea il tuo account";
+const String tLoginAccount = "Accedi al tuo account";
 const String tCompilateField = "Compila i campi per registrarti";
+const String tCompilateFieldForLogin = "Compila i campi per accedere";
 const String tHintInsertEmail = "Inserisci la tua email";
 const String tHintInsertUName = "Inserisci il nome";
 const String tHintSurName = "Inserisci il cognome";
@@ -106,6 +108,12 @@ const String tSubTitleBehavioral = "Benessere emotivo";
 const String tSelectedGender = "Seleziona il sesso";
 const String tSelectedEnergyLevel = "Seleziona il livello di energia";
 const String tSuccessAddDog = "Amico a quattro zampe aggiunto con successo!";
+
+// ------------ FORM POST ------------
+const String tTitleAddPost = "Aggiungi Post";
+const String tTitleEssential = "Dati Essenziali";
+const tTitlePost = "Titolo Post";
+const tCategoryPost = "Categoria";
 
 // ------------ DELETE USER ------------
 const String tSecureDeleteUser = "Sei sicuro di voler eliminare questo utente?";

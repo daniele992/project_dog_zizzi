@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/presentation/views/payTable/pay_table.dart';
+import 'package:project_dog_zizzi/presentation/widgets/dialog/dialog_add_post.dart';
 import '../../../core/constants/image_strings.dart';
 import '../../../core/constants/text_strings.dart';
 import '../../../core/providers/authRepository/user_provider.dart';
@@ -51,7 +52,7 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
         ),
         body: pages[pageIndex],
         floatingActionButton:FloatingActionButton(
-          //TODO devo cambiare onpressed i base ad admin o no, se admin creo post senno creo cane
+
           onPressed: (){
             isAdmin.when(
                 error: (_, __) {
@@ -64,12 +65,23 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
                   showDialog(
                       context: context,
                       builder: (_) => admin
-                          ? const ShowDialogAddDog()
-                          : const ShowDialogAddDog()
+                          ? const ShowDialogAddPost()
+                          : const ShowDialogAddDog(),
                   );
                 }
             );
           },
+          /* VERSIONE PIU' PULITA UTILIZZANDO .Value che però non gestisce error
+          onPressed: (){
+            final admin = isAdmin.value;
+            if(admin == null) return;
+            showDialog(
+                context: context,
+                builder: (_) =>
+                    admin ? const ShowDialogAddPost() : const ShowDialogAddDog(),
+            );
+          },*/
+
 
           tooltip: isAdmin.when(
               loading: () => tLoading,

@@ -74,6 +74,9 @@ flutter:
     - assets/images/homepage/
     - assets/json/genderDog.json
     - assets/json/energyLevelDog.json
+    - assets/json/categoryPost.json
+    - assets/json/priorityPost.json
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

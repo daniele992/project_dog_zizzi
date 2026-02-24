@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "News",
+    "description": "Novità",
+    "abbreviation": "Nw"
+  },
+  {
+    "id": 2,
+    "name": "Evento",
+    "description": "Evento in programma",
+    "abbreviation": "Ev"
+  },
+  {
+    "id": 3,
+    "name": "Promozione",
+    "description": "Promozione in programma",
+    "abbreviation": "Pm"
+  },
+  {
+    "id": 4,
+    "name": "Comunicazione",
+    "description": "Comunicazione da fare",
+    "abbreviation": "Cm"
+  },
+  {
+    "id": 5,
+    "name": "Avviso urgente",
+    "description": "Avviso urgente da fare",
+    "abbreviation": "Au"
+  }
+]

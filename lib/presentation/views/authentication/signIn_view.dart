@@ -111,10 +111,14 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                         Center(
                           child: Column(
                             children: [
-                              Icon(LineAwesomeIcons.user, size: 70, color: Colors.blueGrey.shade700),
+                              Icon(
+                                  LineAwesomeIcons.sign_in_alt_solid,
+                                  size: 70,
+                                  color: Colors.blue.shade700
+                              ),
                               const SizedBox(height: 16),
                               Text(
-                                tCreateAccount,
+                                tLoginAccount,
                                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.blueGrey.shade800,
@@ -122,7 +126,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                tCompilateField,
+                                tCompilateFieldForLogin,
                                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                   color: Colors.grey.shade600,
                                 ),
