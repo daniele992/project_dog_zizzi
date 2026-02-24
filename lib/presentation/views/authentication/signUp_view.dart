@@ -206,6 +206,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                               ),
                               onChanged: (value) {
                                 ref.read(passwordProvider.notifier).state = value; //aggiorna il provider
+                                ref.read(passwordStrengthProvider.notifier).calculate(value);
                               },
                             ),
                             const SizedBox(height: tFormHeight - 20),
@@ -234,6 +235,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
                             const SizedBox(height: tFormHeight - 20),
 
+                            //Password StrenghtBar
                             Consumer(
                                 builder: (context, ref, _){
                                   final strength = ref.watch(passwordStrengthProvider);
