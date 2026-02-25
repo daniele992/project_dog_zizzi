@@ -8,6 +8,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/core/constants/text_strings.dart';
 import 'package:project_dog_zizzi/core/utils/validators/form_add_dog_validators.dart';
+import '../../../core/constants_widget/show_quill_simple_toolbar.dart';
 import '../../../core/providers/addPost/dropdown_add_post_provider.dart';
 import '../dropdown/dropdown_form_field_dog.dart';
 
@@ -102,28 +103,7 @@ class _ShowDialogAddPost extends ConsumerState<ShowDialogAddPost> {
                           const SizedBox(height: 6),
 
                           //Toolbar Titolo
-                          QuillSimpleToolbar(
-                            controller: _titleController,
-                            config: const QuillSimpleToolbarConfig(
-                              showBoldButton: true,
-                              showItalicButton: false,
-                              showUnderLineButton: false,
-                              showStrikeThrough: false,
-                              showColorButton: true,
-                              showBackgroundColorButton: false,
-                              showAlignmentButtons: false,
-                              showListNumbers: false,
-                              showListBullets: false,
-                              showQuote: false,
-                              showCodeBlock: false,
-                              showSearchButton: false,
-                              showListCheck: false,
-                              showInlineCode: false,
-                              showLink: false,
-                              showSubscript: false,
-                              showSuperscript: false,
-                            ),
-                          ),
+                          CustomQuillToolbar(controller: _titleController),
                           const SizedBox(height: 12),
 
                           //QuillEditor per il Titolo
@@ -146,22 +126,7 @@ class _ShowDialogAddPost extends ConsumerState<ShowDialogAddPost> {
                           const SizedBox(height: 12),
 
                           //Toolbar Sottotitolo
-                          QuillSimpleToolbar(
-                            controller: _subTitleController,
-                            config: const QuillSimpleToolbarConfig(
-                              showBoldButton: true,
-                              showItalicButton: false,
-                              showUnderLineButton: false,
-                              showStrikeThrough: false,
-                              showColorButton: true,
-                              showBackgroundColorButton: false,
-                              showAlignmentButtons: false,
-                              showListNumbers: false,
-                              showListBullets: false,
-                              showQuote: false,
-                              showCodeBlock: false,
-                            ),
-                          ),
+                          CustomQuillToolbar(controller: _subTitleController),
                           const SizedBox(height: 12),
 
                           //QuillEditor per il sottotitolo
@@ -183,6 +148,47 @@ class _ShowDialogAddPost extends ConsumerState<ShowDialogAddPost> {
                           ),
                           const SizedBox(height: 12),
 
+                          //Toolbar testo del post
+                          CustomQuillToolbar(controller: _controller),
+                          const SizedBox(height: 12),
+
+                          //Testo Post
+                          Container(
+                              height: 300,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey.shade300),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: QuillEditor(
+                                focusNode: _editorFocusNode,
+                                scrollController: _editorScrollController,
+                                controller: _controller,
+                                config: QuillEditorConfig(
+                                  placeholder: 'Start writing your notes...',
+                                  padding: const EdgeInsets.all(16),
+                                  embedBuilders: [
+                                    ...FlutterQuillEmbeds.editorBuilders(),
+                                    TimeStampEmbedBuilder(),
+                                  ],
+                                ),
+                              ))
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      ExpansionTile(
+                        title: const Text(
+                          tTitleEssential,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        leading: const Icon(
+                          Icons.badge_outlined,
+                          color: Colors.blue,
+                        ),
+                        iconColor: Colors.red,
+                        children: [
+                          const SizedBox(height: 6),
                           //Categoria
                           DropDownFormFieldDog(
                             asyncProvider: ref.watch(categoryPostProvider), // AsyncValue<List<GenderDog>>
@@ -209,45 +215,6 @@ class _ShowDialogAddPost extends ConsumerState<ShowDialogAddPost> {
                           ),
                           const SizedBox(height: 12),
 
-                          //Toolbar testo del post
-                          QuillSimpleToolbar(
-                            controller: _controller,
-                            config: const QuillSimpleToolbarConfig(
-                              showBoldButton: true,
-                              showItalicButton: true,
-                              showUnderLineButton: true,
-                              showStrikeThrough: true,
-                              showColorButton: true,
-                              showBackgroundColorButton: true,
-                              showAlignmentButtons: true,
-                              showListNumbers: true,
-                              showListBullets: true,
-                              showQuote: true,
-                              showCodeBlock: false,
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-
-                          //Testo Post
-                          Container(
-                              height: 300,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey.shade300),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: QuillEditor(
-                                focusNode: _editorFocusNode,
-                                scrollController: _editorScrollController,
-                                controller: _controller,
-                                config: QuillEditorConfig(
-                                  placeholder: 'Start writing your notes...',
-                                  padding: const EdgeInsets.all(16),
-                                  embedBuilders: [
-                                    ...FlutterQuillEmbeds.editorBuilders(),
-                                    TimeStampEmbedBuilder(),
-                                  ],
-                                ),
-                              ))
                         ],
                       ),
                       const SizedBox(height: 16),
