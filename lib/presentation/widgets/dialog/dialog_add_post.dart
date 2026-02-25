@@ -116,6 +116,12 @@ class _ShowDialogAddPost extends ConsumerState<ShowDialogAddPost> {
                               showListBullets: false,
                               showQuote: false,
                               showCodeBlock: false,
+                              showSearchButton: false,
+                              showListCheck: false,
+                              showInlineCode: false,
+                              showLink: false,
+                              showSubscript: false,
+                              showSuperscript: false,
                             ),
                           ),
                           const SizedBox(height: 12),
@@ -203,7 +209,7 @@ class _ShowDialogAddPost extends ConsumerState<ShowDialogAddPost> {
                           ),
                           const SizedBox(height: 12),
 
-                          //Toolbar
+                          //Toolbar testo del post
                           QuillSimpleToolbar(
                             controller: _controller,
                             config: const QuillSimpleToolbarConfig(
