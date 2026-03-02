@@ -393,6 +393,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                           password: passwordController.text,
                                           privacyPolicy: privacyAccepted,
                                           conditions: conditionsAccepted,
+                                          updatingByEmail: updatingByEmail,
                                           admin: false,
                                         );
 
