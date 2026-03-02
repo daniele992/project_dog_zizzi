@@ -40,6 +40,13 @@ class UserCard extends ConsumerWidget {
                 ),
                 const SizedBox(width: 8),
                 AdminBadge(isAdmin: user.admin),
+                const SizedBox(width: 8),
+                IconButton(
+                  icon: const Icon(Icons.send_rounded, color: Colors.grey),
+                  onPressed: () {
+
+                  }, // solo UI per ora
+                ),
                 IconButton(
                   icon: const Icon(Icons.delete_outline, color: Colors.red),
                   onPressed: () {
