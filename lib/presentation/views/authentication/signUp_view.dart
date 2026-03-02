@@ -6,6 +6,7 @@ import 'package:project_dog_zizzi/core/providers/authRepository/auth_providers.d
 import 'package:project_dog_zizzi/data/models/user_registration_model.dart';
 import '../../../core/constants/sizes.dart';
 import '../../../core/constants/text_strings.dart';
+import '../../../core/constants_widget/text_Form_Field_signUp.dart';
 import '../../../core/providers/connectivity/connectivity_provider.dart';
 import '../../../core/utils/helper/responsive_helper.dart';
 import '../../../core/utils/helper/snackbar_helper.dart';
@@ -38,6 +39,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
   bool privacyAccepted = false;
   bool conditionsAccepted = false;
+  bool updatingByEmail = false;
 
   @override
   void dispose(){
@@ -149,38 +151,35 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                         child: Column(
                           children: [
                             //TextFormField for insert Email
-                            TextFormField(
+                            SingUpTextFormField(
                               controller: emailController,
+                              label: tEmail,
+                              hintText: tHintInsertEmail,
+                              prefixIcon: const Icon(LineAwesomeIcons.envelope),
                               validator: FormValidators.validateEmail,
-                              decoration: const InputDecoration(
-                                prefixIcon: Icon(LineAwesomeIcons.envelope),
-                                labelText: tEmail,
-                                hintText: tHintInsertEmail,
-                              ),
+                              required: true,
                             ),
                             const SizedBox(height: tFormHeight - 20),
 
                             //TextFormField for insert name
-                            TextFormField(
+                            SingUpTextFormField(
                               controller: nameController,
+                              label: tName,
+                              hintText: tHintInsertUName,
+                              prefixIcon: const Icon(LineAwesomeIcons.user),
                               validator: FormValidators.validateName,
-                              decoration: const InputDecoration(
-                                prefixIcon: Icon(LineAwesomeIcons.user),
-                                labelText: tName,
-                                hintText: tHintInsertUName,
-                              ),
+                              required: true,
                             ),
                             const SizedBox(height: tFormHeight - 20),
 
                             //TextFormField for insert surname
-                            TextFormField(
+                            SingUpTextFormField(
                               controller: surnameController,
+                              label: tSurname,
+                              hintText: tHintSurName,
+                              prefixIcon: const Icon(LineAwesomeIcons.user),
                               validator: FormValidators.validateName,
-                              decoration: const InputDecoration(
-                                prefixIcon: Icon(LineAwesomeIcons.user),
-                                labelText: tSurname,
-                                hintText: tHintSurName,
-                              ),
+                              required: true,
                             ),
                             const SizedBox(height: tFormHeight - 20),
 
@@ -191,8 +190,20 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                               obscureText: _obscureText,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(LineAwesomeIcons.lock_solid),
-                                labelText: tPassword,
                                 hintText: tHintInsertPw,
+                                label: RichText(
+                                  text: TextSpan(
+                                    text: tPassword,
+                                    style: Theme.of(context).inputDecorationTheme.labelStyle ??
+                                        const TextStyle(color: Colors.black),
+                                    children: const [
+                                      TextSpan(
+                                        text: ' *',
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 suffixIcon: IconButton(
                                   icon: Icon(
                                     _obscureText ? LineAwesomeIcons.eye : LineAwesomeIcons.eye_slash,
@@ -217,8 +228,20 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                               obscureText: _obscureTextRepeatPw,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(LineAwesomeIcons.lock_solid),
-                                labelText: tRepeatPw,
                                 hintText: tHintRepeatPw,
+                                  label: RichText(
+                                    text: TextSpan(
+                                      text: tRepeatPw,
+                                      style: Theme.of(context).inputDecorationTheme.labelStyle ??
+                                          const TextStyle(color: Colors.black),
+                                      children: const [
+                                        TextSpan(
+                                          text: ' *',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 suffixIcon: IconButton(
                                     icon: Icon(
                                       _obscureTextRepeatPw ? LineAwesomeIcons.eye : LineAwesomeIcons.eye_slash,
@@ -307,6 +330,29 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                     ),
                                   )
                                 )
+                              ],
+                            ),
+
+                            //CheckBox for accept notification path email
+                            Row(
+                              children: [
+                                Checkbox(
+                                  checkColor: Colors.green,
+                                  activeColor: Colors.white,
+                                  side: BorderSide(
+                                      color: updatingByEmail ? Colors.green : Colors.red
+                                  ),
+                                  value: updatingByEmail,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      updatingByEmail = value ?? false;
+                                    });
+                                  },
+                                ),
+                                const Text(
+                                    tAcceptReceiveUpdating,
+                                    style: TextStyle(color: Colors.red),
+                                ),
                               ],
                             ),
 

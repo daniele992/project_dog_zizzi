@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/listUsers_model.dart';
+import '../../services/email_launcher_service.dart';
 import 'admin_badge.dart';
 import 'dialog/delete_user_dialog.dart';
 
@@ -44,7 +45,7 @@ class UserCard extends ConsumerWidget {
                 IconButton(
                   icon: const Icon(Icons.send_rounded, color: Colors.grey),
                   onPressed: () {
-
+                    EmailLauncherService.sendEmail(user.email);
                   }, // solo UI per ora
                 ),
                 IconButton(
