@@ -5,6 +5,7 @@ class UserRegistrationModel {
   final String password;
   final bool privacyPolicy;
   final bool conditions;
+  final bool updatingByEmail;
   final bool admin;
 
   //Constructor User
@@ -15,6 +16,7 @@ class UserRegistrationModel {
     required this.password,
     required this.privacyPolicy,
     required this.conditions,
+    required this.updatingByEmail,
     required this.admin,
   });
 
@@ -29,6 +31,7 @@ class UserRegistrationModel {
     "password": password,
     "acceptPrivacy": privacyPolicy,
     "acceptTerms": conditions,
+    "updatingByEmail": updatingByEmail,
     "admin": false
   };
 }
