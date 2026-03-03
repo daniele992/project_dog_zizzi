@@ -9,6 +9,7 @@ class UserModel{
   final DateTime createdAt;
   final bool acceptTerms;
   final bool acceptPrivacy;
+  final bool updatingByEmail;
 
   UserModel({
     required this.id,
@@ -18,7 +19,8 @@ class UserModel{
     required this.admin,
     required this.createdAt,
     required this.acceptTerms,
-    required this.acceptPrivacy
+    required this.acceptPrivacy,
+    required this.updatingByEmail
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json){
@@ -31,6 +33,7 @@ class UserModel{
         createdAt: DateTime.parse(json['createdAt']),
         acceptTerms: json['acceptTerms'],
         acceptPrivacy: json['acceptPrivacy'],
+        updatingByEmail: json['updatingByEmail']
     );
   }
 }

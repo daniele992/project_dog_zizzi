@@ -122,6 +122,26 @@ class UserCard extends ConsumerWidget {
               ],
             ),
 
+            const SizedBox(height: 8),
+
+            //AGGIORNAMENTI EMAIL
+            Row(
+              children: [
+                const Text(
+                  'Aggiornamenti via E-Mail: ',
+                  style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey
+                  ),
+                ),
+                Icon(
+                  user.updatingByEmail ? Icons.check_circle : Icons.cancel,
+                  color: user.updatingByEmail ? Colors.green : Colors.red,
+                  size: 14,
+                )
+              ],
+            ),
+
             //ICONA PER MOSTRARE INFORMAZIONI AGGIUNTIVE, IN QUESTO CASO I CANI
             Align(
               alignment: Alignment.bottomRight,

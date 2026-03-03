@@ -349,9 +349,12 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                     });
                                   },
                                 ),
-                                const Text(
-                                    tAcceptReceiveUpdating,
-                                    style: TextStyle(color: Colors.red),
+                                Text(
+                                  tAcceptReceiveUpdating,
+                                  style: TextStyle(color: updatingByEmail
+                                      ? Colors.green
+                                      : Colors.red
+                                  ),
                                 ),
                               ],
                             ),
