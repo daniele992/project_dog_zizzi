@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../data/models/category_post_model.dart';
-import '../../../data/models/priority_post_model.dart';
+import '../../../features/post/domain/entities/category_post_model.dart';
+import '../../../features/post/domain/entities/priority_post_model.dart';
 
 /*
 * Carica i dati JSON dal bundle

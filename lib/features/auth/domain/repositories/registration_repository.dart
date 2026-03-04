@@ -1,0 +1,5 @@
+import '../entities/user_registration_model.dart';
+
+abstract class RegistrationRepository {
+  Future<bool> register(UserRegistrationModel request);
+}

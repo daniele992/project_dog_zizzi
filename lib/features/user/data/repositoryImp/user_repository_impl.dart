@@ -1,0 +1,43 @@
+import '../../../../core/constants/text_strings.dart';
+import '../../domain/repositories/user_repository.dart';
+import '../../../../services/token_service.dart';
+import '../datasource/remote/user_remote_datasource.dart';
+import '../../domain/entities/listUsers_model.dart';
+
+class UserRepositoryImpl implements UserRepository{
+  final UserRemoteDatasource remoteDatasource;
+  final TokenStorage tokenStorage;
+
+  UserRepositoryImpl(
+      this.remoteDatasource,
+      this.tokenStorage,
+      );
+
+  @override
+  Future<List<UserModel>> getUsers({bool? isAdmin}) async {
+
+    final token = await tokenStorage.getToken();
+    if(token == null) {
+      throw Exception(tErrorNoToken);
+    }
+
+    return remoteDatasource.fetchUsers(
+      token: token,
+      isAdmin: isAdmin,
+    );
+  }
+
+  @override
+  Future<void> deleteUser(int id) async {
+    final token = await tokenStorage.getToken();
+
+    if(token == null){
+      throw Exception(tErrorNoToken);
+    }
+
+    await remoteDatasource.deleteUser(
+      token: token,
+      id: id,
+    );
+  }
+}

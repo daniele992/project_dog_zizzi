@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:project_dog_zizzi/data/repositories/auth_repository_impl.dart';
-import 'package:project_dog_zizzi/domain/usecases/user/register_user.dart';
-import '../../../data/datasources/remote/auth_remote_datasource.dart';
-import '../../../presentation/viewmodels/authentication/sign_up_state.dart';
-import '../../../presentation/viewmodels/authentication/signup_view_model.dart';
+import 'package:project_dog_zizzi/features/auth/data/repositoryImp/auth_repository_impl.dart';
+import 'package:project_dog_zizzi/features/auth/application/usecase/register_user.dart';
+import '../../../features/auth/data/datasource/remote/auth_remote_datasource.dart';
+import '../../../features/auth/presentation/viewModel/sign_up_state.dart';
+import '../../../features/auth/presentation/viewModel/signup_view_model.dart';
 
 /*
 * UI non conosce HTTP

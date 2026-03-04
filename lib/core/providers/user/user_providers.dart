@@ -1,13 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/core/providers/token/auth_token_provider.dart';
-import 'package:project_dog_zizzi/data/datasources/remote/user_remote_datasource.dart';
-import 'package:project_dog_zizzi/data/repositories/user_repository_impl.dart';
-import 'package:project_dog_zizzi/domain/usecases/user/get_users.dart';
-import 'package:project_dog_zizzi/presentation/viewmodels/user/delete_user_view_model.dart';
-import '../../../data/models/listUsers_model.dart';
-import '../../../domain/usecases/user/delete_user.dart';
-import '../../../presentation/viewmodels/user/delete_user_state.dart';
-import '../../../presentation/viewmodels/user/user_view_model.dart';
+import 'package:project_dog_zizzi/features/user/data/datasource/remote/user_remote_datasource.dart';
+import 'package:project_dog_zizzi/features/user/data/repositoryImp/user_repository_impl.dart';
+import 'package:project_dog_zizzi/features/user/application/usecase/get_users.dart';
+import 'package:project_dog_zizzi/features/user/presentation/viewModel/delete_user_view_model.dart';
+import '../../../features/user/domain/entities/listUsers_model.dart';
+import '../../../features/user/application/usecase/delete_user.dart';
+import '../../../features/user/presentation/viewModel/delete_user_state.dart';
+import '../../../features/user/presentation/viewModel/user_view_model.dart';
 
 
 //Provider DataSource

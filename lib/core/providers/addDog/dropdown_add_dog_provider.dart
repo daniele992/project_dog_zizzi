@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_dog_zizzi/data/models/dog_energy_level_model.dart';
-import 'package:project_dog_zizzi/data/models/dog_gender_model.dart';
+import 'package:project_dog_zizzi/features/dog/domain/entities/dog_energy_level_model.dart';
+import 'package:project_dog_zizzi/features/dog/domain/entities/dog_gender_model.dart';
 
 /*
 * Carica i dati JSON dal bundle

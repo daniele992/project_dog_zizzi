@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import '../presentation/views/authentication/signIn_view.dart';
-import '../presentation/views/authentication/signUp_view.dart';
-import '../presentation/views/conditions/conditions.dart';
-import '../presentation/views/homepage/home_page.dart';
-import '../presentation/views/privacy/privacy.dart';
+import '../features/auth/presentation/view/signIn_view.dart';
+import '../features/auth/presentation/view/signUp_view.dart';
+import '../features/auth/presentation/view/conditions.dart';
+import '../features/homepage/presentation/view/home_page.dart';
+import '../features/auth/presentation/view/privacy.dart';
 
 class AppRoutes {
   static const login = '/login';
