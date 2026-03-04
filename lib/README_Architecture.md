@@ -26,6 +26,7 @@ Esso è il regista delle operazioni e non conosce dettagli tecnici (database, AP
 Contiene il cuore del business ed include: Entities, Value objects, regole di business pure e interfacce dei repository.
 E' indipendente da tutt e non dipende da framework o database, è il livello più stbile nel tempo
 REGOLA D'ORO: il domain non deve mai importare Flutterse vedi: import 'package: flutter/...' dentro il domain significa che si sta rompendo la clean architecture
+mai usare MODEL, tojson, fromJson, mai importare roba da altri layer. Se nel domain si ha un file con: MAP, toJson, jsonDecode, htpp si sta rompendo la clean architecture
 
 - DATA LAYER
 Gestisce i dettagli tecnici ed include: Repository implementation, Datasource (local, remote), API client, Database, Mapper DTO <-> Domain
