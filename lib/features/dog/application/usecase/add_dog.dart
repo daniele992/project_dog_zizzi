@@ -1,16 +1,17 @@
 import 'package:project_dog_zizzi/features/dog/domain/entities/addDogModel.dart';
-import '../../domain/repositories/add_dog_repository.dart';
+import '../../domain/entities/dog.dart';
+import '../../domain/repositories/dog_repository.dart';
 
 /* Un UseCasen rappresenta un azione del dominio: "Ottieni utenti", "Login utente"
 è il cuore della clean architecture e non sa nulla di: HTTP, TOKEN, API, DATABASE
 lo UseCase descrive COSA vuoi fare e non COME vuoi farlo*/
 
 class AddDogUseCase{
-  final AddDogRepository repository;
+  final DogRepository repository;
 
   AddDogUseCase(this.repository);
 
-  Future<void> call(AddDogModel dog){
+  Future<void> call(Dog dog){
     return repository.addDog(dog);
   }
 }

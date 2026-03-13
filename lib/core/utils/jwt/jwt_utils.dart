@@ -1,57 +1,54 @@
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class JwtUtils {
-
- // static const _storage = FlutterSecureStorage();
-
+  ///Funzione per recuperare userName dal token
   static String? getUserNameFromToken(String token) {
-    if(JwtDecoder.isExpired(token)) return null;
+    if (JwtDecoder.isExpired(token)) return null;
     final decoded = JwtDecoder.decode(token);
 
     final name = decoded['name'] as String?;
     final surname = decoded['surname'] as String?;
 
-    if(name == null || surname == null) return null;
+    if (name == null || surname == null) return null;
 
     return '$name $surname';
   }
 
- /* static Future<String?> getEmail() async {
-    final  token = await _storage.read(key: 'jwt');
-
-    if(token == null) return null;
-    if(JwtDecoder.isExpired(token)) return null;
-
-    final decoded = JwtDecoder.decode(token);
-    return decoded['email'] as String?;
-  } */
-
- static bool isAdminFromToken(String token) {
-    if(JwtDecoder.isExpired(token)) return false;
+  ///Funzione per recuperare isAdmin dal token
+  static bool isAdminFromToken(String token) {
+    if (JwtDecoder.isExpired(token)) return false;
     final decoded = JwtDecoder.decode(token);
     final adminValue = decoded['admin'];
-    if(adminValue == null) return false;
-    if(adminValue is bool) return adminValue;
+    if (adminValue == null) return false;
+    if (adminValue is bool) return adminValue;
 
     //se arriva String "True/False"
-    if(adminValue is String) return adminValue.toLowerCase() == 'true';
+    if (adminValue is String) return adminValue.toLowerCase() == 'true';
 
     //fallback
     return false;
+  }
 
- }
+  ///Funzione per recuperare userId dal token
+  static int? getUserIdFromToken(String token) {
+    if (JwtDecoder.isExpired(token)) return null;
 
-  /* static Future<bool> isLoggedIn() async {
-    final token = await _storage.read(key: 'jwt');
-    if (token == null) return false;
+    final decoded = JwtDecoder.decode(token);
 
-    return !JwtDecoder.isExpired(token);
-  } */
+    //final userIdValue = decoded['userId'];
 
- /* static Future<void> logout() async {
-    await _storage.delete(key: 'jwt');
-  } */
+    //Spesso nei JWT L'id non si chiama ownerId. Quindi questa è una versione più robusta
+    final userIdValue =
+        decoded['ownerId'] ??
+        decoded['nameid'] ??
+        decoded['userId'] ??
+        decoded['sub'] ??
+        decoded['id'];
 
+    if (userIdValue == null) return null;
 
+    if (userIdValue is int) return userIdValue;
 
+    return int.tryParse(userIdValue.toString());
+  }
 }

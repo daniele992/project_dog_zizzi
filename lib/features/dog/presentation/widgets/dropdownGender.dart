@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/text_strings.dart';
-import '../../../../core/providers/addDog/dropdown_add_dog_provider.dart';
+import '../../../../core/providers/dog/dropdown_add_dog_provider.dart';
 import '../../domain/entities/dog_gender_model.dart';
 
 class DropDownGender extends ConsumerWidget{

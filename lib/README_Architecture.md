@@ -11,7 +11,7 @@ METAFORA SEMPLICE:
  - VIEWMODEL --> Cameriere (porta i piatti al cliente)
  - USECASE --> Chef (decide come preparare il piatto)
  - REPOSITORY --> Responsabile di magazzino (decide da dove prendere ingredienti)
- - DATASOURCE --> Fornitore reale (mercato, supermercato, ecc.)
+ - DATASOURCE --> Fornitore reale (mercato, supermercato, ecc.). esso lavora solo con i model e non con le entities
 
 # CLEAN ARHITECTURE
 

@@ -63,6 +63,8 @@ const String tGeneralError = "Errore";
 const String tErrorDownloadUser = "Errore caricamento utenti";
 const String tErrorNoToken = "Token non disponibile";
 const String tErrorDuringSave = "Errore durante il salvataggio: ";
+const String tErrorInsertDog = "Errore inserimento cane";
+const String tErrorRecovery = "Errore nel recupero";
 
 // ------------ HOMEPAGE ------------
 const String tProfile = "Profilo";

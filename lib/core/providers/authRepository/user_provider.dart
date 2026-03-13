@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/core/providers/token/auth_token_provider.dart';
 import '../../utils/jwt/jwt_utils.dart';
 
+
 final userFullNameProvider = Provider<AsyncValue<String?>>((ref) {
   final tokenAsync = ref.watch(authTokenProvider);
 
@@ -26,6 +27,20 @@ final userIsAdminProvider = Provider<AsyncValue<bool>>((ref) {
     loading: () => const AsyncValue.loading(),
     error: (e, st) => AsyncValue.error(e, st),
   );
+});
+
+final userIdProvider = Provider<AsyncValue<int?>>((ref) {
+  final tokenAsync = ref.watch(authTokenProvider);
+
+  return tokenAsync.when(
+      data: (token){
+        if(token == null) return const AsyncValue.data(null);
+        return AsyncValue.data(JwtUtils.getUserIdFromToken(token));
+      },
+      loading: () => const AsyncValue.loading(),
+      error: (e, st) => AsyncValue.error(e, st),
+  );
+
 });
 
 

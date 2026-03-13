@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_dog_zizzi/core/constants/text_strings.dart';
-import 'package:project_dog_zizzi/core/providers/addDog/add_dog_providers.dart';
-import 'package:project_dog_zizzi/features/dog/data/mapper/add_dog_form_mapper.dart';
-import '../../../../core/providers/addDog/dropdown_add_dog_provider.dart';
+import '../../../../core/providers/authRepository/user_provider.dart';
+import '../../../../core/providers/dog/dog_providers.dart';
+import '../../../../core/providers/dog/dropdown_add_dog_provider.dart';
 import '../../../../core/utils/validators/form_add_dog_validators.dart';
+import '../../domain/entities/dog.dart';
 import 'dropdown_form_field_dog.dart';
 
 class ShowDialogAddDog extends ConsumerStatefulWidget {
@@ -305,30 +306,44 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                                   onPressed: state.isLoading
-                                      ?  null
+                                      ? null
                                       : () {
-                                    if(_formKey.currentState!.validate()) {
+                                    if (_formKey.currentState!.validate()) {
+
                                       final selectedEnergyLevel = ref.read(energyLevelSelectedProvider);
-                                      final String? energyLevelCodeToSave = selectedEnergyLevel?.code;
                                       final selectedGender = ref.read(genderSelectedProvider);
-                                      final String? genderCodeToSave = selectedGender?.code;
-                                      final model = mapFormToAddDogModel(
-                                          ownerId: 1,
-                                          name: nameDog.text,
-                                          age: int.tryParse(ageDog.text) ?? 0, //Converto in int perchè dal form mi arriva una stringa
-                                          gender: genderCodeToSave ?? 'S',
-                                          breed: breedDog.text,
-                                          allergy: allergyDog.text,
-                                          foodIntolerances: foodIntolerancesDog.text,
-                                          typeFood: typeFoodDog.text,
-                                          pathologies: pathologiesDog.text,
-                                          notesHealth: notesHealth.text,
-                                          socialization: socializationDog.text,
-                                          fearsOrPhobias: fearsOrPhobias.text,
-                                          energyLevel: energyLevelCodeToSave ?? 'S',
-                                          notesBehavioral: notesBehavioral.text
+                                      final ownerId = ref.watch(userIdProvider).value;
+
+                                      if(ownerId == null){
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          const SnackBar(content: Text("Utente non autenticato")),
+                                        );
+                                        return;
+                                      }
+
+                                      print ("valore: $ownerId");
+
+                                      final dog = Dog(
+                                        id: 0, // verrà generato dal backend
+                                        ownerId: ownerId, // recuperalo dal user loggato
+                                        name: nameDog.text,
+                                        age: int.tryParse(ageDog.text) ?? 0,
+                                        gender: selectedGender?.code ?? 'S',
+                                        breed: breedDog.text,
+                                        socialization: socializationDog.text,
+                                        fearsOrPhobias: fearsOrPhobias.text,
+                                        energyLevel: selectedEnergyLevel?.code ?? 'M',
+                                        notesHealth: notesHealth.text,
+                                        allergy: allergyDog.text,
+                                        foodIntolerances: foodIntolerancesDog.text,
+                                        pathologies: pathologiesDog.text,
+                                        typeFood: typeFoodDog.text,
+                                        notesBehavioral: notesBehavioral.text
                                       );
-                                      ref.read(addDogViewModelProvider.notifier).addDog(model);
+
+                                      ref
+                                          .read(addDogViewModelProvider.notifier)
+                                          .addDog(dog);
                                     }
                                   },
                                   child: state.isLoading

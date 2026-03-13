@@ -1,14 +1,27 @@
-import 'package:project_dog_zizzi/features/dog/domain/entities/addDogModel.dart';
-import 'package:project_dog_zizzi/features/dog/domain/repositories/add_dog_repository.dart';
-import '../datasource/remote/add_dog_remote_data_source.dart';
+import '../../domain/entities/dog.dart';
+import '../../domain/repositories/dog_repository.dart';
+import '../datasource/remote/dog_remote_data_source.dart';
+import '../models/dog_model.dart';
 
-class AddDogRepositoryImpl implements AddDogRepository{
-  final AddDogRemoteDataSource remoteDataSource;
+class DogRepositoryImpl implements DogRepository {
 
-  AddDogRepositoryImpl(this.remoteDataSource);
+  final DogRemoteDataSource remoteDataSource;
+
+  DogRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<void> addDog(AddDogModel dog) {
-    return remoteDataSource.addDog(dog);
+  Future<void> addDog(Dog dog) {
+
+    final model = DogModel.fromEntity(dog);
+
+    return remoteDataSource.addDog(model);
+  }
+
+  @override
+  Future<List<Dog>> getDogsByUser(int userId) async {
+
+    final models = await remoteDataSource.getDogsByUser(userId);
+
+    return models; // DogModel estende Dog
   }
 }
