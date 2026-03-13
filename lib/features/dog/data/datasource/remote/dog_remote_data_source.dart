@@ -4,6 +4,7 @@ import 'package:project_dog_zizzi/core/constants/api_constants.dart';
 import '../../../../../core/constants/text_strings.dart';
 import '../../models/dog_model.dart';
 
+//Il datasource lavora solo con i model
 abstract class DogRemoteDataSource {
   Future<void> addDog(DogModel dog);
   Future<List<DogModel>> getDogsByUser(int userId);
