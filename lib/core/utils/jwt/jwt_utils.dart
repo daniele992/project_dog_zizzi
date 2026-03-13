@@ -41,9 +41,9 @@ class JwtUtils {
     final userIdValue =
         decoded['ownerId'] ??
         decoded['nameid'] ??
-        decoded['userId'] ??
         decoded['sub'] ??
-        decoded['id'];
+        decoded['id'] ??
+        decoded['userId'];
 
     if (userIdValue == null) return null;
 

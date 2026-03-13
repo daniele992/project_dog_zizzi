@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../../../features/dog/application/usecase/add_dog.dart';
 import '../../../features/dog/application/usecase/gets_dogs_by_user.dart';
 import '../../../features/dog/data/datasource/remote/dog_remote_data_source.dart';
-import '../../../features/dog/data/repositoryImp/add_dog_repository_impl.dart';
+import '../../../features/dog/data/repositoryImp/dog_repository_impl.dart';
 import '../../../features/dog/domain/entities/dog.dart';
 import '../../../features/dog/domain/repositories/dog_repository.dart';
 import '../../../features/dog/presentation/viewModel/add_dog_view_model.dart';
