@@ -7,7 +7,10 @@ class GetDogsByUserUseCase {
 
   GetDogsByUserUseCase(this.repository);
 
-  Future<List<Dog>> call(int userId) {
-    return repository.getDogsByUser(userId);
+  Future<List<Dog>> call({
+    required int userId,
+    bool? isAdmin,
+  }) {
+    return repository.getDogsByUser(userId: userId, isAdmin:isAdmin);
   }
 }

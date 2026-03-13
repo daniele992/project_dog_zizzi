@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:project_dog_zizzi/core/providers/token/auth_token_provider.dart';
 import '../../../features/dog/application/usecase/add_dog.dart';
 import '../../../features/dog/application/usecase/gets_dogs_by_user.dart';
 import '../../../features/dog/data/datasource/remote/dog_remote_data_source.dart';
@@ -18,7 +19,10 @@ final dogRemoteDataSourceProvider = Provider(
 
 //Provider che il crea il Repository. Esso prende i dati dal data source e li converte in entities
 final dogRepositoryProvider = Provider<DogRepository>(
-      (ref) => DogRepositoryImpl(ref.read(dogRemoteDataSourceProvider)),
+    (ref) => DogRepositoryImpl(
+      ref.read(dogRemoteDataSourceProvider),
+      ref.read(tokenStorageProvider), //provider che gestsce il token
+    ),
 );
 
 //Crea lo UseCase per aggiungere un cane. Esso contiene la logica dell'applicazione
