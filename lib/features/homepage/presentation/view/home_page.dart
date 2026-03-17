@@ -71,17 +71,6 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
                 }
             );
           },
-          /* VERSIONE PIU' PULITA UTILIZZANDO .Value che però non gestisce error
-          onPressed: (){
-            final admin = isAdmin.value;
-            if(admin == null) return;
-            showDialog(
-                context: context,
-                builder: (_) =>
-                    admin ? const ShowDialogAddPost() : const ShowDialogAddDog(),
-            );
-          },*/
-
 
           tooltip: isAdmin.when(
               loading: () => tLoading,

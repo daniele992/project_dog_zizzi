@@ -1,6 +1,12 @@
+
+import 'dart:core';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/constants/api_constants.dart';
+import '../../../../routes/app_routes.dart';
+import '../../../dog/presentation/view/list_dog_view.dart';
 import '../../domain/entities/listUsers_model.dart';
 import '../../../../services/email_launcher_service.dart';
 import 'admin_badge.dart';
@@ -10,7 +16,7 @@ class UserCard extends ConsumerWidget {
   final UserModel user;
 
   const UserCard({super.key, required this.user});
-
+  final String uri= ApiConstants.baseUrl;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
@@ -149,7 +155,9 @@ class UserCard extends ConsumerWidget {
                   color: Colors.blue,
                   iconSize: 36,
                   icon: const Icon(Icons.add_circle),
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pushNamed(context, AppRoutes.listDogs);
+                  },
               ),
             ),
 
