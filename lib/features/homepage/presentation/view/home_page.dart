@@ -42,11 +42,12 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
               UserAccountsDrawerHeader(
                 currentAccountPicture: Image(image: AssetImage(tLogoImage)),
                 currentAccountPictureSize: Size(100, 100),
-                accountName: Text('For Support:'),
+                accountName: Text(tSupport),
                 accountEmail: Text(tEmailSupport),
               ),
-              ListTile(leading: Icon(Icons.home), title: Text('Home')),
-              ListTile(leading: Icon(Icons.verified_user), title: Text('Profile')),
+              ListTile(leading: Icon(Icons.home), title: Text(tHome)),
+              ListTile(leading: Icon(Icons.verified_user), title: Text(tProfile)),
+              ListTile(leading: Icon(Icons.login_outlined), title: Text(tLogout))
             ],
           ),
         ),
@@ -57,7 +58,7 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
             isAdmin.when(
                 error: (_, __) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Errore Permessi"))
+                      const SnackBar(content: Text(tErrorPermissions))
                   );
                 },
                 loading: (){},

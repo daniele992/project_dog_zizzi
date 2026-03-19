@@ -55,6 +55,13 @@ const String tLoading = "Caricamento...";
 const String tLoadingUsers = "Caricamento Utenti...";
 const String tDelete = "Cancella";
 const String tSave = "Salva";
+const String tProfile = "Profilo";
+
+// ------------ DRAWER ------------
+const String tLogout = "Logout";
+const String tSupport = "Per supporto: ";
+const String tHome = "Home";
+const String tErrorPermissions = "Errore Permessi";
 
 // ------------ ERROR MESSAGE ------------
 const String tRegistrationFailed = "Registrazione fallita per motivi sconosciuti";
@@ -67,7 +74,6 @@ const String tErrorInsertDog = "Errore inserimento cane";
 const String tErrorRecovery = "Errore nel recupero";
 
 // ------------ HOMEPAGE ------------
-const String tProfile = "Profilo";
 const String tEmailSupport = "moranidaniele129@yahoo.it";
 const String tAppName = "/appable:";
 const String tAddPosts = "Aggiungi post";
