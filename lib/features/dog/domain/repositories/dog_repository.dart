@@ -1,6 +1,7 @@
 import 'package:project_dog_zizzi/features/dog/domain/entities/dog_energy_level.dart';
 
 import '../entities/dog.dart';
+import '../entities/dog_gender.dart';
 
 /*Il repository non conosce HTTP ma conosce da dove arrivano i dati e che tipo di dati ritorna.
 il repository è un intermediario: decide da dove arrivano i dati (oggi potrebbe essere API REMOTA e domani Cache/Mock ecc.
@@ -15,5 +16,6 @@ abstract class DogRepository {
     bool? isAdmin
   });
   Future<List<EnergyLevelDog>> getEnergyLevels();
+  Future<List<DogGender>> getGenderDog();
 }
 

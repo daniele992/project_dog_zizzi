@@ -6,4 +6,9 @@ class DogLocalDataSource {
     final jsonStr = await rootBundle.loadString('assets/json/energyLevelDog.json');
     return jsonDecode(jsonStr);
   }
+
+  Future<List<dynamic>> getDogGender() async {
+    final jsonStr = await rootBundle.loadString('assets/json/genderDog.json');
+    return   jsonDecode(jsonStr);
+  }
 }

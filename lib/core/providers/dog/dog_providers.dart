@@ -2,7 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_dog_zizzi/core/providers/token/auth_token_provider.dart';
 import '../../../features/dog/application/usecase/add_dog.dart';
-import '../../../features/dog/application/usecase/get_energy_level_usecase.dart';
+import '../../../features/dog/application/usecase/get_dog_energy_level_usecase.dart';
+import '../../../features/dog/application/usecase/get_dog_gender_usecase.dart';
 import '../../../features/dog/application/usecase/gets_dogs_by_user.dart';
 import '../../../features/dog/data/datasource/local/dog_local_data_source.dart';
 import '../../../features/dog/data/datasource/remote/dog_remote_data_source.dart';
@@ -54,4 +55,8 @@ final dogListViewModelProvider = StateNotifierProvider<DogListViewModel, AsyncVa
 
 final getEnergyLevelUseCaseProvider = Provider(
       (ref) => GetEnergyLevelUseCase(ref.read(dogRepositoryProvider)),
+);
+
+final getDogGenderUseCaseProvider = Provider(
+        (ref) => GetDogGenderUseCase(ref.read(dogRepositoryProvider)),
 );

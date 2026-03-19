@@ -13,10 +13,9 @@ import 'dog_providers.dart';
 * è un future provider quindi si può usare asyncValue.when(...)
 * */
 
-final genderProvider = FutureProvider<List<GenderDog>> ((ref) async {
-    final jsonStr = await rootBundle.loadString('assets/json/genderDog.json');
-    final List list = jsonDecode(jsonStr);
-    return list.map((e) => GenderDog.fromJson(e)).toList();
+final genderProvider = FutureProvider<List<DogGender>> ((ref) async {
+   final listGenderDog = ref.read(getDogGenderUseCaseProvider);
+   return listGenderDog();
   });
 
 final energyLevelProvider = FutureProvider<List<EnergyLevelDog>>((ref) async {
@@ -25,5 +24,5 @@ final energyLevelProvider = FutureProvider<List<EnergyLevelDog>>((ref) async {
   });
 
 
-final genderSelectedProvider = StateProvider<GenderDog?>((ref) => null);
+final genderSelectedProvider = StateProvider<DogGender?>((ref) => null);
 final energyLevelSelectedProvider = StateProvider<EnergyLevelDog?>((ref) => null);

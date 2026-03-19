@@ -18,7 +18,7 @@ class DropDownGender extends ConsumerWidget{
         loading: () => const CircularProgressIndicator(),
         error: (e, _) => Text("Errore: $e") ,
         data: (genderList){
-          return DropdownButtonFormField<GenderDog>(
+          return DropdownButtonFormField<DogGender>(
             isExpanded: true,
             decoration: const InputDecoration(labelText: tGenderDog),
             initialValue: selectedGenderDog,
@@ -27,7 +27,7 @@ class DropDownGender extends ConsumerWidget{
               ref.read(genderSelectedProvider.notifier).state = val;
             },
             items: genderList.map((gender){
-              return DropdownMenuItem<GenderDog>(
+              return DropdownMenuItem<DogGender>(
                 value: gender,
                 child: Text(gender.name),
               );

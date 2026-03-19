@@ -1,7 +1,9 @@
 import 'package:project_dog_zizzi/features/dog/data/models/dog_energy_level_model.dart';
+import 'package:project_dog_zizzi/features/dog/data/models/dog_gender_model.dart';
 import 'package:project_dog_zizzi/services/token_service.dart';
 import '../../domain/entities/dog.dart';
 import '../../domain/entities/dog_energy_level.dart';
+import '../../domain/entities/dog_gender.dart';
 import '../../domain/repositories/dog_repository.dart';
 import '../datasource/local/dog_local_data_source.dart';
 import '../datasource/remote/dog_remote_data_source.dart';
@@ -43,9 +45,17 @@ class DogRepositoryImpl implements DogRepository {
   @override
   Future<List<EnergyLevelDog>> getEnergyLevels() async {
     final list = await localDataSource.getEnergyLevels();
-
     return list
         .map((e) => EnergyLevelDogModel.fromJson(e)
         .toEntity()).toList();
+  }
+
+  @override
+  Future<List<DogGender>> getGenderDog() async {
+    final list = await localDataSource.getDogGender();
+    return list
+        .map((e) => DogGenderModel.fromJson(e)
+        .toEntity()).toList();
+
   }
 }
