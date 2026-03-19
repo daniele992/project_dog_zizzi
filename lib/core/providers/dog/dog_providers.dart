@@ -2,7 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_dog_zizzi/core/providers/token/auth_token_provider.dart';
 import '../../../features/dog/application/usecase/add_dog.dart';
+import '../../../features/dog/application/usecase/get_energy_level_usecase.dart';
 import '../../../features/dog/application/usecase/gets_dogs_by_user.dart';
+import '../../../features/dog/data/datasource/local/dog_local_data_source.dart';
 import '../../../features/dog/data/datasource/remote/dog_remote_data_source.dart';
 import '../../../features/dog/data/repositoryImp/dog_repository_impl.dart';
 import '../../../features/dog/domain/entities/dog.dart';
@@ -17,11 +19,16 @@ final dogRemoteDataSourceProvider = Provider(
       (ref) => DogRemoteDataSourceImpl(ref.read(httpClientProvider)),
 );
 
+final dogLocalDataSourceProvider = Provider(
+    (ref) => DogLocalDataSource(),
+);
+
 //Provider che il crea il Repository. Esso prende i dati dal data source e li converte in entities
 final dogRepositoryProvider = Provider<DogRepository>(
     (ref) => DogRepositoryImpl(
       ref.read(dogRemoteDataSourceProvider),
       ref.read(tokenStorageProvider), //provider che gestsce il token
+      ref.read(dogLocalDataSourceProvider)
     ),
 );
 
@@ -43,4 +50,8 @@ final addDogViewModelProvider = StateNotifierProvider<AddDogViewModel, AsyncValu
 //Provider che gestisce la lista dei cani
 final dogListViewModelProvider = StateNotifierProvider<DogListViewModel, AsyncValue<List<Dog>>>(
       (ref) => DogListViewModel(ref.read(getDogsByUserUseCaseProvider)),
+);
+
+final getEnergyLevelUseCaseProvider = Provider(
+      (ref) => GetEnergyLevelUseCase(ref.read(dogRepositoryProvider)),
 );

@@ -1,7 +1,9 @@
+import 'package:project_dog_zizzi/features/dog/data/models/energy_level_dog_model.dart';
 import 'package:project_dog_zizzi/services/token_service.dart';
-
 import '../../domain/entities/dog.dart';
+import '../../domain/entities/dog_energy_level_model.dart';
 import '../../domain/repositories/dog_repository.dart';
+import '../datasource/local/dog_local_data_source.dart';
 import '../datasource/remote/dog_remote_data_source.dart';
 import '../models/dog_model.dart';
 
@@ -13,8 +15,9 @@ class DogRepositoryImpl implements DogRepository {
 
   final DogRemoteDataSource remoteDataSource;
   final TokenStorage tokenStorage;
+  final DogLocalDataSource localDataSource;
 
-  DogRepositoryImpl(this.remoteDataSource, this.tokenStorage);
+  DogRepositoryImpl(this.remoteDataSource, this.tokenStorage, this.localDataSource);
 
   @override
   Future<void> addDog(Dog dog) {
@@ -35,5 +38,14 @@ class DogRepositoryImpl implements DogRepository {
         userId: userId,
         isAdmin: isAdmin
     );
+  }
+
+  @override
+  Future<List<EnergyLevelDog>> getEnergyLevels() async {
+    final list = await localDataSource.getEnergyLevels();
+
+    return list
+        .map((e) => EnergyLevelDogModel.fromJson(e)
+        .toEntity()).toList();
   }
 }

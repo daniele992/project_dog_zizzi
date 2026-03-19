@@ -1,3 +1,5 @@
+import 'package:project_dog_zizzi/features/dog/domain/entities/dog_energy_level_model.dart';
+
 import '../entities/dog.dart';
 
 /*Il repository non conosce HTTP ma conosce da dove arrivano i dati e che tipo di dati ritorna.
@@ -12,5 +14,6 @@ abstract class DogRepository {
     required int userId,
     bool? isAdmin
   });
+  Future<List<EnergyLevelDog>> getEnergyLevels();
 }
 
