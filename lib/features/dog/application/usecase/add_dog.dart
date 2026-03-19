@@ -1,4 +1,3 @@
-import 'package:project_dog_zizzi/features/dog/domain/entities/addDogModel.dart';
 import '../../domain/entities/dog.dart';
 import '../../domain/repositories/dog_repository.dart';
 
