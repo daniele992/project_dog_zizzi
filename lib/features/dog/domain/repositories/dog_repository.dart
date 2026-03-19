@@ -1,4 +1,4 @@
-import 'package:project_dog_zizzi/features/dog/domain/entities/dog_energy_level_model.dart';
+import 'package:project_dog_zizzi/features/dog/domain/entities/dog_energy_level.dart';
 
 import '../entities/dog.dart';
 

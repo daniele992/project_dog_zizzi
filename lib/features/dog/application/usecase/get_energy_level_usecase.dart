@@ -1,4 +1,4 @@
-import 'package:project_dog_zizzi/features/dog/domain/entities/dog_energy_level_model.dart';
+import 'package:project_dog_zizzi/features/dog/domain/entities/dog_energy_level.dart';
 import '../../domain/repositories/dog_repository.dart';
 
 class GetEnergyLevelUseCase {

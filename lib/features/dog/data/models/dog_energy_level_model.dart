@@ -1,4 +1,4 @@
-import '../../domain/entities/dog_energy_level_model.dart';
+import '../../domain/entities/dog_energy_level.dart';
 
 class EnergyLevelDogModel {
   final int id;
