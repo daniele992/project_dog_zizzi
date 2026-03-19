@@ -6,7 +6,7 @@ import '../../models/dog_model.dart';
 
 //Il datasource lavora solo con i model
 abstract class DogRemoteDataSource {
-  Future<void> addDog(DogModel dog);
+  Future<void> addDog(DogModel dog, String token);
   Future<List<DogModel>> getDogsByUser({
     required String token,
     required int userId,
@@ -20,10 +20,13 @@ class DogRemoteDataSourceImpl implements DogRemoteDataSource {
   DogRemoteDataSourceImpl(this.client);
 
   @override
-  Future<void> addDog(DogModel dog) async {
+  Future<void> addDog(DogModel dog, String token) async {
     final response = await client.post(
       Uri.parse('${ApiConstants.baseUrl}/Dogs'),
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
       body: jsonEncode(dog.toJson()),
     );
 

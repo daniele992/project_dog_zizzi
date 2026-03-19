@@ -22,9 +22,11 @@ class DogRepositoryImpl implements DogRepository {
   DogRepositoryImpl(this.remoteDataSource, this.tokenStorage, this.localDataSource);
 
   @override
-  Future<void> addDog(Dog dog) {
+  Future<void> addDog(Dog dog) async {
+    final token = await tokenStorage.getToken();
+    if(token == null) throw Exception('Token mancante');
     final model = DogModel.fromEntity(dog);
-    return remoteDataSource.addDog(model);
+    return remoteDataSource.addDog(model, token);
   }
 
   @override
