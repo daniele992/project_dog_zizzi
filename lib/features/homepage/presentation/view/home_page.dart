@@ -53,7 +53,6 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
         ),
         body: pages[pageIndex],
         floatingActionButton:FloatingActionButton(
-
           onPressed: (){
             isAdmin.when(
                 error: (_, __) {

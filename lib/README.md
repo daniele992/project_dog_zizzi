@@ -67,3 +67,20 @@ e da come i dati vengono recuperati o mostrati.
   ESEMPI:
   UserRepository
   ProductRepository
+
+
+microtask serve per eseguire del codice "subito dopo" il ciclo corrente, ma prima di altri eventi asincroni
+In pratica non vieen eseguito immediatamente, viene messeo nel microtask queue, viene eseguito appena il thread è libero, prima di altri future
+è utile per evitare errori durante il build, posticipare leggermente un'operazione, assicurarsi che il contesto sia già pronto
+
+
+# DIFFERENZE TRA ref.read, ref.watch e ref.listen
+
+- REF.READ => Legge il valore di un provider una sola volta e non ascolta cambiamenti. Non causa il rebuild del widget.
+Si usa generalmente dentro onPressed e quando si vuole ottenere un valore o chiamare un metodo
+
+- REF.LISTEN => Ascolta cambiamenti ma senza rebuild, permette di agire ma con effetti collaterali.
+Si usa per mostrare una snackbar, per la navigazione e logica che non riguarda la UI direttamente
+
+- REF.WATCH => Ascolta un provider, quando il valore cambia il widget si ricostruisce (rebuild)
+si usa quando si vuole una UI reattiva, il dato deve aggiornarsi automaticamente

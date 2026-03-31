@@ -156,7 +156,40 @@ class UserCard extends ConsumerWidget {
                   iconSize: 36,
                   icon: const Icon(Icons.add_circle),
                   onPressed: (){
-                    Navigator.pushNamed(context, AppRoutes.listDogs);
+
+                    /*ref.read(dogListViewModelProvider.notifier).fetchDogs(
+                      userId: 1,
+                      isAdmin: true,
+                    ); */
+
+                    //Navigator.pushNamed(context, AppRoutes.listDogs);
+                    /*showModalBottomSheet(
+                        elevation: 2,
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (context) => const ListDogs(),
+                    );*/
+
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text("Lista Cani"),
+                          content: const SizedBox(
+                            width: double.maxFinite,
+                            child: ListDogs(),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text("Chiudi"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    
+                    
                   },
               ),
             ),
