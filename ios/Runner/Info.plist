@@ -4,6 +4,10 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Serve per selezionare immagini dal dispositivo</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Serve per scattare foto</string>
 	<key>CFBundleDisplayName</key>
 	<string>Project Dog Zizzi</string>
 	<key>CFBundleExecutable</key>
