@@ -14,6 +14,7 @@ class Dog {
   final String pathologies;
   final String typeFood;
   final String notesBehavioral;
+  final String? imageUrl;
 
   const Dog({
     required this.id,
@@ -31,5 +32,6 @@ class Dog {
     required this.pathologies,
     required this.typeFood,
     required this.notesBehavioral,
+    this.imageUrl,
   });
 }

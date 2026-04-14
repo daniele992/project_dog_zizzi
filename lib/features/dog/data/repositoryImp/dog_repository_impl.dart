@@ -1,6 +1,7 @@
+import 'dart:io';
 import 'package:project_dog_zizzi/features/dog/data/models/dog_energy_level_model.dart';
 import 'package:project_dog_zizzi/features/dog/data/models/dog_gender_model.dart';
-import 'package:project_dog_zizzi/services/token_service.dart';
+import 'package:project_dog_zizzi/core/utils/token_service.dart';
 import '../../domain/entities/dog.dart';
 import '../../domain/entities/dog_energy_level.dart';
 import '../../domain/entities/dog_gender.dart';
@@ -22,11 +23,14 @@ class DogRepositoryImpl implements DogRepository {
   DogRepositoryImpl(this.remoteDataSource, this.tokenStorage, this.localDataSource);
 
   @override
-  Future<void> addDog(Dog dog) async {
+  Future<void> addDog(Dog dog, {File? imageFile}) async {
     final token = await tokenStorage.getToken();
     if(token == null) throw Exception('Token mancante');
     final model = DogModel.fromEntity(dog);
-    return remoteDataSource.addDog(model, token);
+    return remoteDataSource.addDog(
+        model,
+        token,
+    );
   }
 
   @override

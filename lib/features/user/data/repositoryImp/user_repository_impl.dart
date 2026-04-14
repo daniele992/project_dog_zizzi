@@ -1,6 +1,6 @@
 import '../../../../core/constants/text_strings.dart';
 import '../../domain/repositories/user_repository.dart';
-import '../../../../services/token_service.dart';
+import '../../../../core/utils/token_service.dart';
 import '../datasource/remote/user_remote_datasource.dart';
 import '../../domain/entities/listUsers_model.dart';
 

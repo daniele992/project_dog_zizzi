@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_dog_zizzi/services/token_service.dart';
+import 'package:project_dog_zizzi/core/utils/token_service.dart';
 import '../../domain/entities/login_request_model.dart';
 import '../../application/usecase/login_user.dart';
 

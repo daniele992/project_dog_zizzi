@@ -17,7 +17,8 @@ class DogModel extends Dog {
     required super.foodIntolerances,
     required super.pathologies,
     required super.typeFood,
-    required super.notesBehavioral
+    required super.notesBehavioral,
+    super.imageUrl
   });
 
   //Funzione per JSON -> DogModel. Quindi API / DB -> JSON -> DogModel
@@ -37,7 +38,8 @@ class DogModel extends Dog {
       foodIntolerances: json['foodIntolerances'],
       pathologies: json['pathologies'],
       typeFood: json['typeFood'],
-      notesBehavioral: json['notesBehavioral']
+      notesBehavioral: json['notesBehavioral'],
+      imageUrl: json['imageUrl']
     );
   }
 
@@ -58,7 +60,8 @@ class DogModel extends Dog {
       foodIntolerances: dog.foodIntolerances,
       pathologies: dog.pathologies,
       typeFood: dog.typeFood,
-      notesBehavioral: dog.notesBehavioral
+      notesBehavioral: dog.notesBehavioral,
+      imageUrl: dog.imageUrl
     );
   }
 
@@ -70,6 +73,7 @@ class DogModel extends Dog {
       "age": age,
       "gender": gender,
       "breed": breed,
+      "imageUrl": imageUrl
     },
     "health": {
       "allergy": allergy,

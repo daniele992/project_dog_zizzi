@@ -8,7 +8,7 @@ import '../../../../core/constants/api_constants.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../dog/presentation/view/list_dog_view.dart';
 import '../../domain/entities/listUsers_model.dart';
-import '../../../../services/email_launcher_service.dart';
+import '../../../../core/utils/email_launcher_service.dart';
 import 'admin_badge.dart';
 import 'delete_user_dialog.dart';
 

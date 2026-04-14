@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:project_dog_zizzi/features/dog/domain/entities/dog_energy_level.dart';
 import '../entities/dog.dart';
 import '../entities/dog_gender.dart';
@@ -9,7 +10,7 @@ IL REPOSITORY E' IL CERVELLO LOGISTICO DEI DATI. DECIDE DA DOVE ARRIVANO MA NON 
 
 
 abstract class DogRepository {
-  Future<void> addDog(Dog dog);
+  Future<void> addDog(Dog dog, {File? imageFile});
 
   Future<List<Dog>>getDogsByUser({
     required int userId,

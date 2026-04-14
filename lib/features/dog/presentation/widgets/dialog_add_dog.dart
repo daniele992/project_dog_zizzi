@@ -1,10 +1,14 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:project_dog_zizzi/core/constants/text_strings.dart';
+import 'package:project_dog_zizzi/core/providers/media/image_picker_provider.dart';
 import '../../../../core/providers/authRepository/user_provider.dart';
 import '../../../../core/providers/dog/dog_providers.dart';
 import '../../../../core/providers/dog/dropdown_add_dog_provider.dart';
+import '../../../../core/utils/image_picker_service.dart';
 import '../../../../core/utils/validators/form_add_dog_validators.dart';
 import '../../domain/entities/dog.dart';
 import 'dropdown_form_field_dog.dart';
@@ -18,6 +22,9 @@ class ShowDialogAddDog extends ConsumerStatefulWidget {
 
 class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
   final _formKey = GlobalKey<FormState>();
+  File? _image;
+  final ImagePicker _picker = ImagePicker();
+
 
   //Variables Registry
   final nameDog = TextEditingController();
@@ -40,7 +47,6 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
 
   @override
   Widget build(BuildContext context) {
-
     ref.listen<AsyncValue<void>>(addDogViewModelProvider, (previous, next) {
       next.whenOrNull(
         data: (_) {
@@ -57,7 +63,9 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
       );
     });
 
+    final imageService = ref.read(imagePickerProvider);
     final state = ref.watch(addDogViewModelProvider);
+    //final file = await imageService.pickFromGallery();
 
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -147,6 +155,11 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                                 ),
                                 validator: FormDogValidator.validateBreed,
                               ),
+
+                              const SizedBox(height: 12),
+
+
+
                             ],
                           ),
 

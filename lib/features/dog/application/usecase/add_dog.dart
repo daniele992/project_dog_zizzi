@@ -1,3 +1,4 @@
+import 'dart:io';
 import '../../domain/entities/dog.dart';
 import '../../domain/repositories/dog_repository.dart';
 
@@ -10,7 +11,7 @@ class AddDogUseCase{
 
   AddDogUseCase(this.repository);
 
-  Future<void> call(Dog dog){
-    return repository.addDog(dog);
+  Future<void> call(Dog dog, {File? imageFile}){
+    return repository.addDog(dog, imageFile: imageFile);
   }
 }
