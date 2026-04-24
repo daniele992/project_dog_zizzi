@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,9 +23,10 @@ class ShowDialogAddDog extends ConsumerStatefulWidget {
 
 class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
   final _formKey = GlobalKey<FormState>();
-  File? _image;
+
+  XFile? _image;
   double _uploadProgress = 0;
-  final ImagePicker _picker = ImagePicker();
+  Uint8List? _imageBytes;
 
   //Variables Registry
   final nameDog = TextEditingController();
@@ -47,14 +49,14 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
 
   Future<void> _pickImage() async {
     final picker = ref.read(imagePickerProvider);
-    final compressor = ref.read(imageCompressorProvider);
 
     final file = await picker.pickFromGallery();
 
     if (file == null) return;
 
-    // 🔴 VALIDAZIONE DIMENSIONE
-    final sizeMB = file.lengthSync() / (1024 * 1024);
+    // VALIDAZIONE DIMENSIONE
+    final bytes = await file.readAsBytes();
+    final sizeMB = bytes.length / (1024 * 1024);
     if (sizeMB > 5) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Immagine troppo grande (max 5MB)")),
@@ -62,12 +64,11 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
       return;
     }
 
-    // 🔥 COMPRESSIONE
-    final compressed = await compressor.compressImage(file);
-
     setState(() {
-      _image = compressed;
+      _image = file;
+      _imageBytes = bytes;
     });
+
   }
 
   @override
@@ -90,7 +91,7 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
 
     final imageService = ref.read(imagePickerProvider);
     final state = ref.watch(addDogViewModelProvider);
-    //final file = await imageService.pickFromGallery();
+
 
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -223,53 +224,59 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                                   const SizedBox(height: 12),
 
                                   //Previw Immagine
-                                  _image != null
+                                  _imageBytes != null
                                       ? Stack(
-                                          alignment: Alignment.topRight,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.circular(12),
-                                              child: Image.file(
-                                                _image!,
-                                                height: 150,
-                                                width: double.infinity,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            IconButton(
-                                              icon: const Icon(Icons.close, color: Colors.red),
-                                              onPressed: () {
-                                                setState(() {
-                                                  _image = null;
-                                                });
-                                              },
-                                            ),
-                                          ],
-                                        )
-                                      : Container(
+                                    alignment: Alignment.topRight,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: Image.memory(
+                                          _imageBytes!,
                                           height: 150,
                                           width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey.shade200,
-                                            borderRadius: BorderRadius.circular(12),
-                                          ),
-                                          child: const Center(
-                                            child: Text(tNoImageSelection),
-                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
 
+                                      IconButton(
+                                          icon: const Icon(
+                                              Icons.close,
+                                              color: Colors.red
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              _image = null;
+                                              _imageBytes = null;
+                                              _uploadProgress = 0;
+                                            });
+                                          },
+                                      ),
+                                    ],
+                                  ) : Container(
+                                    height: 150,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey.shade200,
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: const Center(
+                                      child: Text(tNoImageSelection),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+
+                                  //Progress Bar
                                   if(_uploadProgress > 0 && _uploadProgress < 1)
                                     Padding(
-                                        padding: const EdgeInsets.only(top: 10),
-                                        child: Column(
-                                          children: [
-                                            LinearProgressIndicator(value: _uploadProgress),
-                                            const SizedBox(height: 5),
-                                            Text("${(_uploadProgress * 100).toStringAsFixed(0)}%"),
-                                          ],
-                                        ),
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Column(
+                                        children: [
+                                          LinearProgressIndicator(value: _uploadProgress),
+                                          const SizedBox(height: 5),
+                                          Text("${(_uploadProgress * 100).toStringAsFixed(0)}%"),
+                                        ],
+                                      ),
                                     ),
-
                                 ],
                               ),
                             ],

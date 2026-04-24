@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+
 import '../../domain/entities/dog.dart';
 import '../../domain/repositories/dog_repository.dart';
 
@@ -11,7 +13,7 @@ class AddDogUseCase{
 
   AddDogUseCase(this.repository);
 
-  Future<void> call(Dog dog, {File? imageFile}){
+  Future<void> call(Dog dog, {XFile? imageFile}){
     return repository.addDog(dog, imageFile: imageFile);
   }
 }
