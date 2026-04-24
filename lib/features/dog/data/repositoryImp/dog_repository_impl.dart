@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:project_dog_zizzi/features/dog/data/models/dog_energy_level_model.dart';
 import 'package:project_dog_zizzi/features/dog/data/models/dog_gender_model.dart';
-import 'package:project_dog_zizzi/core/utils/token_service.dart';
+import 'package:project_dog_zizzi/core/services/token_service.dart';
 import '../../domain/entities/dog.dart';
 import '../../domain/entities/dog_energy_level.dart';
 import '../../domain/entities/dog_gender.dart';

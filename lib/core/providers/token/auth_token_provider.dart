@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:project_dog_zizzi/core/utils/token_service.dart';
+import 'package:project_dog_zizzi/core/services/token_service.dart';
 
 import '../dog/dog_providers.dart';
 import '../dog/dropdown_add_dog_provider.dart';

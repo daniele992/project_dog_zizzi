@@ -117,6 +117,11 @@ const String tSubTitleBehavioral = "Benessere emotivo";
 const String tSelectedGender = "Seleziona il sesso";
 const String tSelectedEnergyLevel = "Seleziona il livello di energia";
 const String tSuccessAddDog = "Amico a quattro zampe aggiunto con successo!";
+const String tPhotoDog = "Foto del cane";
+const String tChooseFromGallery = "Scegli dalla galleria";
+const String tTakePhoto = "Scatta foto";
+const String tNoImageSelection = "Nessuna immagine selezionata";
+
 
 // ------------ FORM POST ------------
 const String tTitleAddPost = "Aggiungi Post";
