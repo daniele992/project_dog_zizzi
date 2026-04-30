@@ -39,7 +39,7 @@ class DogModel extends Dog {
       pathologies: json['pathologies'],
       typeFood: json['typeFood'],
       notesBehavioral: json['notesBehavioral'],
-      imageUrl: json['imageUrl']
+      imageUrl: json['image']
     );
   }
 
@@ -73,7 +73,7 @@ class DogModel extends Dog {
       "age": age,
       "gender": gender,
       "breed": breed,
-      "imageUrl": imageUrl
+      "image": imageUrl
     },
     "health": {
       "allergy": allergy,

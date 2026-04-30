@@ -48,15 +48,14 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
   final notesBehavioral = TextEditingController();
 
   Future<void> _pickImage() async {
-    final picker = ref.read(imagePickerProvider);
+    final service = ref.read(imagePickerProvider);
 
-    final file = await picker.pickFromGallery();
+    final file = await service.pickFromGallery();
 
     if (file == null) return;
 
     // VALIDAZIONE DIMENSIONE
-    final bytes = await file.readAsBytes();
-    final sizeMB = bytes.length / (1024 * 1024);
+    final sizeMB = await service.getSizeMB(file);
     if (sizeMB > 5) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Immagine troppo grande (max 5MB)")),
@@ -64,11 +63,12 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
       return;
     }
 
+    final bytes = await service.getBytes(file);
+
     setState(() {
       _image = file;
       _imageBytes = bytes;
     });
-
   }
 
   @override
@@ -462,7 +462,7 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                                                   setState(() {
                                                     _uploadProgress = progress;
                                                   });
-                                                },
+                                                }, token: '',
                                             );
                                           }
 

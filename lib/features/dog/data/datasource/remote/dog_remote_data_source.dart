@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:project_dog_zizzi/core/constants/api_constants.dart';
 import '../../../../../core/constants/text_strings.dart';
 import '../../models/dog_model.dart';
 
 //Il datasource lavora solo con i model
 abstract class DogRemoteDataSource {
-  Future<void> addDog(DogModel dog, String token);
+  Future<void> addDog(DogModel dog, String token, {XFile? imageFile});
   Future<List<DogModel>> getDogsByUser({
     required String token,
     required int userId,
@@ -21,7 +22,11 @@ class DogRemoteDataSourceImpl implements DogRemoteDataSource {
   DogRemoteDataSourceImpl(this.client);
 
   @override
-  Future<void> addDog(DogModel dog, String token, {File? imageFile}) async {
+  Future<void> addDog(
+      DogModel dog,
+      String token,
+      {XFile? imageFile}) async {
+
     final request = http.MultipartRequest(
       'POST',
       Uri.parse('${ApiConstants.baseUrl}/Dogs'),
@@ -47,17 +52,21 @@ class DogRemoteDataSourceImpl implements DogRemoteDataSource {
 
     //IMMAGINE (Opzionale)
     if(imageFile != null){
+      final bytes = await imageFile.readAsBytes();
+
       request.files.add(
-        await http.MultipartFile.fromPath(
-          'imageUrl', //deve combaciare con il backend
-          imageFile.path
+        http.MultipartFile.fromBytes(
+            'image',
+            bytes,
+            filename: imageFile.name,
         ),
       );
     }
 
     final response = await request.send();
 
-    if(response.statusCode != 200 && response.statusCode != 201){
+    if(response.statusCode != 200 &&
+        response.statusCode != 201){
       throw Exception(tErrorInsertDog);
     }
 

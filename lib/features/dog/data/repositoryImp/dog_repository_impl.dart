@@ -31,6 +31,7 @@ class DogRepositoryImpl implements DogRepository {
     return remoteDataSource.addDog(
         model,
         token,
+        imageFile: imageFile
     );
   }
 

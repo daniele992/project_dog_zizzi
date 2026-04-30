@@ -7,16 +7,24 @@ class UploadService {
 
   Future<String?> uploadImage({
     required XFile file,
+    required String token,
     required Function (double progress) onProgress,
   }) async {
 
+    final bytes = await file.readAsBytes();
     final formData = FormData.fromMap({
-      "image" : await MultipartFile.fromFile(file.path),
+      "image" : MultipartFile.fromBytes(
+        bytes,
+        filename: file.name,
+      ),
     });
 
     final response = await _dio.post(
-      "https://YOUR_API_URL/api/dogs",
+      "http://localhost:5059/api/dogs",
       data: formData,
+      options: Options(
+        headers: {"Authorization": "Bearer $token"},
+      ),
       onSendProgress: (sent, total) {
         final progress = sent / total;
         onProgress(progress);
@@ -24,7 +32,7 @@ class UploadService {
     );
 
     if(response.statusCode == 200){
-      return response.data["imageUrl"];
+      return response.data["image"];
     }
 
     return null;
