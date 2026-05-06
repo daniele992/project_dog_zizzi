@@ -11,7 +11,7 @@ IL REPOSITORY E' IL CERVELLO LOGISTICO DEI DATI. DECIDE DA DOVE ARRIVANO MA NON 
 
 
 abstract class DogRepository {
-  Future<void> addDog(Dog dog);
+  Future<void> addDog(Dog dog, {XFile? imageFile});
   Future<List<Dog>>getDogsByUser({
     required int userId,
     bool? isAdmin

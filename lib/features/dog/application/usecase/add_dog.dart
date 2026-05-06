@@ -12,7 +12,7 @@ class AddDogUseCase{
 
   AddDogUseCase(this.repository);
 
-  Future<void> call(Dog dog){
-    return repository.addDog(dog);
+  Future<void> call(Dog dog, {XFile? imageFile}){
+    return repository.addDog(dog, imageFile: imageFile);
   }
 }
