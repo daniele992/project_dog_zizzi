@@ -425,7 +425,8 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                                         if (_formKey.currentState!.validate()) {
                                           final selectedEnergyLevel = ref.read(energyLevelSelectedProvider);
                                           final selectedGender = ref.read(genderSelectedProvider);
-                                          final ownerId = ref.watch(userIdProvider).value;
+                                          //final ownerId = ref.watch(userIdProvider).value; ref.watch dentro onpressed è inutile
+                                          final ownerId = ref.read(userIdProvider).value;
 
                                           if (ownerId == null) {
                                             ScaffoldMessenger.of(context).showSnackBar(
@@ -452,22 +453,8 @@ class _ShowDialogAddDog extends ConsumerState<ShowDialogAddDog> {
                                               notesBehavioral: notesBehavioral.text
                                           );
 
-                                          //Upload con progress
-                                          if(_image != null){
-                                            final uploadService = UploadService();
-
-                                            await uploadService.uploadImage(
-                                                file: _image!,
-                                                onProgress: (progress) {
-                                                  setState(() {
-                                                    _uploadProgress = progress;
-                                                  });
-                                                }, token: '',
-                                            );
-                                          }
-
                                           //Salva cane
-                                          ref.read(addDogViewModelProvider.notifier).addDog(dog, imageFile: _image);
+                                          ref.read(addDogViewModelProvider.notifier).addDog(dog, _image);
                                         }
                                       },
                                 child: state.isLoading

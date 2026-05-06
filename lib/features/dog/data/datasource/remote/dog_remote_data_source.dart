@@ -1,14 +1,12 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 import 'package:project_dog_zizzi/core/constants/api_constants.dart';
 import '../../../../../core/constants/text_strings.dart';
 import '../../models/dog_model.dart';
 
 //Il datasource lavora solo con i model
 abstract class DogRemoteDataSource {
-  Future<void> addDog(DogModel dog, String token, {XFile? imageFile});
+  Future<void> addDog(DogModel dog, String token);
   Future<List<DogModel>> getDogsByUser({
     required String token,
     required int userId,
@@ -22,55 +20,22 @@ class DogRemoteDataSourceImpl implements DogRemoteDataSource {
   DogRemoteDataSourceImpl(this.client);
 
   @override
-  Future<void> addDog(
-      DogModel dog,
-      String token,
-      {XFile? imageFile}) async {
-
-    final request = http.MultipartRequest(
-      'POST',
-      Uri.parse('${ApiConstants.baseUrl}/Dogs'),
+  Future<void> addDog(DogModel dog, String token) async {
+    final response = await http.post(
+      Uri.parse('${ApiConstants.baseUrl}/dogs'),
+      headers: {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json",
+      },
+      body: jsonEncode(dog.toJson()),
     );
-    //HEADERS
-    request.headers["Authorization"] = 'Bearer $token';
 
-    //CAMPI (NON JSON!)
-    request.fields['ownerId'] = dog.ownerId.toString();
-    request.fields['name'] = dog.name;
-    request.fields['age'] = dog.age.toString();
-    request.fields['gender'] = dog.gender;
-    request.fields['breed'] = dog.breed;
-    request.fields['socialization'] = dog.socialization;
-    request.fields['fearsOrPhobias'] = dog.fearsOrPhobias;
-    request.fields['energyLevel'] = dog.energyLevel;
-    request.fields['notesHealth'] = dog.notesHealth;
-    request.fields['allergy'] = dog.allergy;
-    request.fields['foodIntolerances'] = dog.foodIntolerances;
-    request.fields['pathologies'] = dog.pathologies;
-    request.fields['typeFood'] = dog.typeFood;
-    request.fields['notesBehavioral'] = dog.notesBehavioral;
-
-    //IMMAGINE (Opzionale)
-    if(imageFile != null){
-      final bytes = await imageFile.readAsBytes();
-
-      request.files.add(
-        http.MultipartFile.fromBytes(
-            'image',
-            bytes,
-            filename: imageFile.name,
-        ),
-      );
+    if (response.statusCode != 200 && response.statusCode != 201) {
+      throw Exception("Errore inserimento cane");
     }
-
-    final response = await request.send();
-
-    if(response.statusCode != 200 &&
-        response.statusCode != 201){
-      throw Exception(tErrorInsertDog);
-    }
-
   }
+
+
 
   @override
   Future<List<DogModel>> getDogsByUser({
