@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/providers/authRepository/user_provider.dart';
 import '../../../../core/providers/dog/dog_providers.dart';
+import '../../../../core/utils/Image/build_image_utils.dart';
 
 class ListDogs extends ConsumerStatefulWidget {
   const ListDogs({super.key});
@@ -19,7 +20,7 @@ class _ListDogs extends ConsumerState<ListDogs> {
       final isAdmin = ref.read(userIsAdminProvider).value;
       if (isAdmin != null) {
         //TODO modificare in seguito
-        ref.read(dogListViewModelProvider.notifier).fetchDogs(userId: 1, isAdmin: true);
+        ref.read(dogListViewModelProvider.notifier).fetchDogs(userId: 1005, isAdmin: true);
       }
     });
   }
@@ -39,9 +40,21 @@ class _ListDogs extends ConsumerState<ListDogs> {
               itemCount: dogs.length,
               itemBuilder: (context, index) {
                 final dog = dogs[index];
-                return ListTile(
-                  title: Text(dog.name),
-                  subtitle: Text(dog.breed),
+                print("immagine url: ${dog.imageUrl}");
+                print(buildImageUrl("build: ${dog.imageUrl}"));
+                return Card(
+                  child: ListTile(
+                    leading: dog.imageUrl != null
+                        ? CircleAvatar(
+                      backgroundImage:
+                      NetworkImage(buildImageUrl(dog.imageUrl)),
+                    )
+                        : const CircleAvatar(
+                      child: Icon(Icons.pets),
+                    ),
+                    title: Text(dog.name),
+                    subtitle: Text(dog.breed),
+                  ),
                 );
               },
             );
