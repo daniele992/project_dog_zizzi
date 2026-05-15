@@ -5,7 +5,7 @@ import 'package:project_dog_zizzi/features/post/presentation/widgets/dialog_add_
 import '../../../../core/constants/image_strings.dart';
 import '../../../../core/constants/text_strings.dart';
 import '../../../../core/providers/authRepository/user_provider.dart';
-import '../../../dog/presentation/widgets/dialog_add_dog.dart';
+import '../../../dog/presentation/view/dialog_add_dog.dart';
 import '../widgets/homepageAppBar.dart';
 import '../../../user/presentation/view/listUtents.dart';
 

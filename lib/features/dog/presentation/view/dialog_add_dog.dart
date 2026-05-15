@@ -12,7 +12,7 @@ import '../../../../core/providers/dog/dog_providers.dart';
 import '../../../../core/providers/dog/dropdown_add_dog_provider.dart';
 import '../../../../core/utils/validators/form_add_dog_validators.dart';
 import '../../domain/entities/dog.dart';
-import 'dropdown_form_field_dog.dart';
+import '../widgets/dropdown_form_field_dog.dart';
 
 class ShowDialogAddDog extends ConsumerStatefulWidget {
   const ShowDialogAddDog({super.key});
