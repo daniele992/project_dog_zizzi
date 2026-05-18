@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_dog_zizzi/features/dog/presentation/view/dog_detail_page.dart';
+import '../../../../core/constants/text_strings.dart';
 import '../../../../core/providers/authRepository/user_provider.dart';
 import '../../../../core/providers/dog/dog_providers.dart';
 import '../../../../core/utils/Image/build_image_utils.dart';
@@ -44,12 +46,15 @@ class _ListDogs extends ConsumerState<ListDogs> {
               return Card(
                 child: ListTile(
                   leading: dog.imageUrl != null
-                      ? CircleAvatar(
-                          backgroundImage: NetworkImage(buildImageUrl(dog.imageUrl)),
-                        )
-                      : const CircleAvatar(
-                          child: Icon(Icons.pets),
+                     ? Hero(
+                      tag: dog.imageUrl ?? dog.id.toString(),
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            buildImageUrl(dog.imageUrl)
                         ),
+                      ),
+                  )
+                  : const CircleAvatar(child: Icon(Icons.pets)),
                   title: Text(
                     dog.name.toUpperCase(),
                     style: const TextStyle(
@@ -61,17 +66,22 @@ class _ListDogs extends ConsumerState<ListDogs> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 6),
-                      DogCustomLabelText(label: "Razza", value: dog.breed),
+                      DogCustomLabelText(label: tBreedDog, value: dog.breed),
                       const SizedBox(height: 2),
-                      DogCustomLabelText(label: "Età", value: dog.age.toString()),
+                      DogCustomLabelText(label: tAgeDog, value: "${dog.age.toString()} anni"),
                       const SizedBox(height: 2),
-                      DogCustomLabelText(label: "Genere", value: dog.gender),
+                      DogCustomLabelText(label: tGenderDog, value: dog.gender),
                     ],
                   ),
                   trailing: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios),
                     onPressed: () {
-                      // dettaglio cane
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => DogDetailPage(dog: dog),
+                          ),
+                      );
                     },
                   ),
                 ),

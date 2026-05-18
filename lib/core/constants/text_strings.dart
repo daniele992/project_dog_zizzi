@@ -96,8 +96,9 @@ const String tFilterUsers = "Filtra utenti";
 
 // ------------ FORM DOG ------------
 const String tAddDog = "Nuovo amico a quattro zampe";
-const String tAgeDog = "Anni";
+const String tAgeDog = "Età";
 const String tGenderDog = "Sesso";
+const String tEnergyDog = "Energia";
 const String tBreedDog = "Razza";
 const String tAllergyDog = "Allergia/e";
 const String tFoodIntolerancesDog = "Intolleranze";
@@ -110,6 +111,8 @@ const String tEnergyLevelDog = "Livello di energia";
 const String tNoteBehavioralDog = "Note abitudini";
 const String tTitleRegistry = "Anagrafica";
 const String tTitleHealth = "Salute e alimentazione";
+const String tNoteBehavior = "Note comportamento";
+const String tNoteHealth = "Note salute";
 const String tBehavior = "Comportamento";
 const String tSubTitleRegistry = "Dati generali";
 const String tSubTitleHealth = "Dati sanitari e nutrizionali";
