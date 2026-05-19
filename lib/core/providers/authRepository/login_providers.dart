@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:project_dog_zizzi/core/providers/token/auth_token_provider.dart';
+import 'package:project_dog_zizzi/core/providers/token/token_provider.dart';
 import '../../../features/auth/data/datasource/remote/auth_api.dart';
 import '../../../features/auth/data/repositoryImp/login_repository_impl.dart';
 import '../../../features/auth/application/usecase/login_user.dart';

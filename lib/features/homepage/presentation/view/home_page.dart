@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project_dog_zizzi/core/services/auth/logout_service.dart';
 import 'package:project_dog_zizzi/features/payTable/presentation/view/pay_table.dart';
 import 'package:project_dog_zizzi/features/post/presentation/widgets/dialog_add_post.dart';
 import '../../../../core/constants/image_strings.dart';
@@ -38,16 +39,25 @@ class _MyHomePage extends ConsumerState<MyHomePage> {
         appBar: HomepageAppbar(isDark: isDark),
         drawer: Drawer(
           child: ListView(
-            children: const [
-              UserAccountsDrawerHeader(
+            children: [
+              const UserAccountsDrawerHeader(
                 currentAccountPicture: Image(image: AssetImage(tLogoImage)),
                 currentAccountPictureSize: Size(100, 100),
                 accountName: Text(tSupport),
                 accountEmail: Text(tEmailSupport),
               ),
-              ListTile(leading: Icon(Icons.home), title: Text(tHome)),
-              ListTile(leading: Icon(Icons.verified_user), title: Text(tProfile)),
-              ListTile(leading: Icon(Icons.login_outlined), title: Text(tLogout))
+              const ListTile(leading: Icon(Icons.home), title: Text(tHome)),
+              const ListTile(leading: Icon(Icons.verified_user), title: Text(tProfile)),
+              ListTile(
+                  leading: const Icon(Icons.logout),
+                  title: const Text(tLogout),
+                  onTap: () async {
+                    await LogoutService.performLogout(
+                        context: context,
+                        ref: ref
+                    );
+                  },
+              )
             ],
           ),
         ),

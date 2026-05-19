@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:project_dog_zizzi/core/providers/token/auth_token_provider.dart';
+import 'package:project_dog_zizzi/core/providers/token/token_provider.dart';
 import '../../../features/dog/application/usecase/add_dog.dart';
 import '../../../features/dog/application/usecase/get_dog_energy_level_usecase.dart';
 import '../../../features/dog/application/usecase/get_dog_gender_usecase.dart';

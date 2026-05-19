@@ -50,3 +50,7 @@ UI - USERNOTIFIER -> GETUSER (USECASE) -> USERREPOSITORY -> USERREPOSITORYIMPL -
  7. VIEWMODEL
  8. PROVIDER
  9. VIEW
+
+Per il logout è meglio usare:
+    core/services → quando c’è logica applicativa (token, auth, api, secure storage)
+    core/utils → solo helper generici/stateless

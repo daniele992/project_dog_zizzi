@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_dog_zizzi/core/providers/token/auth_token_provider.dart';
+import 'package:project_dog_zizzi/core/providers/token/token_provider.dart';
 import '../../utils/jwt/jwt_utils.dart';
 
 

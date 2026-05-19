@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project_dog_zizzi/core/providers/token/auth_token_provider.dart';
+import 'package:project_dog_zizzi/core/providers/token/token_provider.dart';
 import 'package:project_dog_zizzi/features/user/data/datasource/remote/user_remote_datasource.dart';
 import 'package:project_dog_zizzi/features/user/data/repositoryImp/user_repository_impl.dart';
 import 'package:project_dog_zizzi/features/user/application/usecase/get_users.dart';
