@@ -9,7 +9,13 @@ import '../../../../core/utils/Image/build_image_utils.dart';
 import '../widgets/dog_custom_label_text.dart';
 
 class ListDogs extends ConsumerStatefulWidget {
-  const ListDogs({super.key});
+
+  final int userId;
+
+  const ListDogs({
+    super.key,
+    required this.userId,
+  });
 
   @override
   ConsumerState<ListDogs> createState() => _ListDogs();
@@ -22,8 +28,7 @@ class _ListDogs extends ConsumerState<ListDogs> {
     Future.microtask(() {
       final isAdmin = ref.read(userIsAdminProvider).value;
       if (isAdmin != null) {
-        //TODO modificare in seguito
-        ref.read(dogListViewModelProvider.notifier).fetchDogs(userId: 1005, isAdmin: true);
+        ref.read(dogListViewModelProvider.notifier).fetchDogs(userId: widget.userId, isAdmin: true);
       }
     });
   }
@@ -74,7 +79,24 @@ class _ListDogs extends ConsumerState<ListDogs> {
                     ],
                   ),
                   trailing: IconButton(
-                    icon: const Icon(Icons.arrow_forward_ios),
+                    icon: const Icon(
+                        Icons.arrow_forward_ios,
+                    ),
+                    color: Colors.blueAccent,
+                    tooltip: "Dettaglio amico a quattro zampe",
+                    style: ButtonStyle(
+                      foregroundColor: WidgetStateProperty.resolveWith<Color>(
+                          (states) {
+                            if(states.contains(WidgetState.hovered)){
+                              return Colors.white;
+                            }
+                            return Colors.blueAccent;
+                          },
+                      ),
+                      overlayColor: WidgetStateProperty.all(
+                        Colors.green.withValues(alpha: 0.8),
+                      )
+                    ),
                     onPressed: () {
                       Navigator.push(
                           context,

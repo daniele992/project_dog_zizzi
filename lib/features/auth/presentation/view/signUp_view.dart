@@ -216,7 +216,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                                 ),
                               ),
                               onChanged: (value) {
-                                ref.read(passwordProvider.notifier).state = value; //aggiorna il provider
+                                ref.read(passwordProvider.notifier).state = value;//aggiorna il provider
+                                setState(() {}); //Forza rebuild per mostrare/nascondere la barra della forza
                               },
                             ),
                             const SizedBox(height: tFormHeight - 20),
@@ -261,6 +262,11 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             Consumer(
                                 builder: (context, ref, _){
                                   final strength = ref.watch(passwordStrengthProvider);
+
+                                  //Se il campo password è vuoto non mostro nulla
+                                  if(passwordController.text.isEmpty){
+                                    return const SizedBox.shrink();
+                                  }
                                   return PasswordStrengthBar(strength: strength);
                                 }
                             ),
@@ -365,13 +371,13 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                               builder: (context, ref, _) {
                                 final connectivityAsyncValue = ref.watch(connectivityProvider);
 
-                                // 👉 di default consideriamo la connessione attiva
+                                //di default considero la connessione attiva
                                 final hasConnection = connectivityAsyncValue.maybeWhen(
                                   data: (status) => status != ConnectivityResult.none,
                                   orElse: () => true,
                                 );
 
-                                // ✅ Stato aggiornato dal ViewModel
+                                //Stato aggiornato dal ViewModel
                                 final signUpState = ref.watch(signUpViewModelProvider);
 
                                 return SizedBox(

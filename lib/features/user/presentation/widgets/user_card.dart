@@ -1,11 +1,8 @@
-
 import 'dart:core';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/api_constants.dart';
-import '../../../../routes/app_routes.dart';
 import '../../../dog/presentation/view/list_dog_view.dart';
 import '../../domain/entities/listUsers_model.dart';
 import '../../../../core/services/email_launcher_service.dart';
@@ -156,28 +153,14 @@ class UserCard extends ConsumerWidget {
                   iconSize: 36,
                   icon: const Icon(Icons.add_circle),
                   onPressed: (){
-
-                    /*ref.read(dogListViewModelProvider.notifier).fetchDogs(
-                      userId: 1,
-                      isAdmin: true,
-                    ); */
-
-                    //Navigator.pushNamed(context, AppRoutes.listDogs);
-                    /*showModalBottomSheet(
-                        elevation: 2,
-                        context: context,
-                        isScrollControlled: true,
-                        builder: (context) => const ListDogs(),
-                    );*/
-
                     showDialog(
                       context: context,
                       builder: (context) {
                         return AlertDialog(
                           title: const Text("Lista Cani"),
-                          content: const SizedBox(
+                          content: SizedBox(
                             width: double.maxFinite,
-                            child: ListDogs(),
+                            child: ListDogs(userId: user.id),
                           ),
                           actions: [
                             TextButton(
@@ -188,12 +171,9 @@ class UserCard extends ConsumerWidget {
                         );
                       },
                     );
-                    
-                    
                   },
               ),
             ),
-
           ],
         ),
       ),

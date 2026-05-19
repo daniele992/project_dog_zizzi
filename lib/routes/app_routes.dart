@@ -14,7 +14,7 @@ class AppRoutes {
   static const homepage = '/homepage';
   static const acceptPrivacy = '/privacy';
   static const acceptConditions = '/conditions';
-  static const listDogs = '/listDogs';
+  //static const listDogs = '/listDogs';
 
 
   //Creazione mappa delle route (Struttura chiave -> valore) in questo caso (String -> WidgetBuilder) quindi (nome route -> pagina da aprire)
@@ -24,7 +24,7 @@ class AppRoutes {
     homepage: (context) => const MyHomePage(),
     acceptPrivacy: (context) => const PrivacyPolicyWidget(),
     acceptConditions: (context) => const TermsOfUseWidget(),
-    listDogs: (context) => const ListDogs(),
+    //listDogs: (context) => const ListDogs(),
 
   };
 }
