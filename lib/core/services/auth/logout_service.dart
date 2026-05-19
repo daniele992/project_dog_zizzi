@@ -14,7 +14,7 @@ class LogoutService {
     //Elimina Token
     await ref.read(logoutTokenProvider)();
 
-    //Evita wanrning context async
+    //Evita wanrning context async. mounted serve per verificare che il widget sia ancora presente nell'albero dei widget dopo un'operazione async
     if (!context.mounted) return;
 
     //Navigazione al login

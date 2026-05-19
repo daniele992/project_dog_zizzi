@@ -84,3 +84,15 @@ Si usa per mostrare una snackbar, per la navigazione e logica che non riguarda l
 
 - REF.WATCH => Ascolta un provider, quando il valore cambia il widget si ricostruisce (rebuild)
 si usa quando si vuole una UI reattiva, il dato deve aggiornarsi automaticamente
+
+- if (!context.mounted) return;
+/*Evita wanrning context async. mounted serve per verificare che il widget sia ancora presente nell'albero dei widget dopo un'operazione async
+Durante il precedente await potrebbe succedere:
+* la pagina venga chiusa
+* il widget venga distrutto
+* l'utente cambi schermata
+e quindi il BuildContext non sia più valido
+if (!context.mounted) return significa: "continua SOLO se questo widget esiste ancora"
+Da Flutter 3.7+ è considerata best practice ogni volta che:
+usi await e poi usi context
+*/
